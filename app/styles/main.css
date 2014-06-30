@@ -86,14 +86,15 @@ body {
     pointer-events: none;
     fill: none;
     stroke: #fff;
-    stroke-width: 1.5px;
+    stroke-width: .5px;
   }
 
   .states {
-    fill: #333;
+    fill: #222;
+    transition: fill 0.3s;
   }
 
   .states:hover {
-    fill: #e88;
+    fill: #fd3;
   }
 }

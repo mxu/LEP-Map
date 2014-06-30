@@ -26,7 +26,7 @@ angular.module('lepMapApp.directives')
                         .attr('width', width)
                         .attr('height', height);
 
-                        d3.json('data/us.json', function(error, us) {
+                        d3.json('data/us-states.json', function(error, us) {
                             if(error) { return console.error(error); }
 
                             svg.append('defs').append('path')
@@ -46,8 +46,11 @@ angular.module('lepMapApp.directives')
                               .enter().append('path')
                                 .attr('class', 'states')
                                 .attr('d', path)
+                                .on('click', function(d) {
+                                    console.log(d.properties.name);
+                                })
                               .append('title')
-                                .text(function(d) { return d.id; });
+                                .text(function(d) { return d.properties.code; });
 
                             svg.append('path')
                                 .attr('class', 'state-boundaries')
