@@ -28,15 +28,30 @@ angular.module('lepMapApp.directives')
 
                         d3.json('data/us.json', function(error, us) {
                             if(error) { return console.error(error); }
-                            window.us = us;
-                            svg.insert('path', '.graticule')
+
+                            svg.append('defs').append('path')
+                                .attr('id', 'land')
                                 .datum(topojson.feature(us, us.objects.land))
-                                .attr('class', 'land')
                                 .attr('d', path);
 
-                            svg.insert('path', '.graticule')
+                            svg.append('clipPath')
+                                .attr('id', 'clip-land')
+                              .append('use')
+                                .attr('xlink:href', '#land');
+
+                            svg.append('g')
+                                .attr('clip-path', 'url(#clip-land)')
+                              .selectAll('path')
+                                .data(topojson.feature(us, us.objects.states).features)
+                              .enter().append('path')
+                                .attr('class', 'states')
+                                .attr('d', path)
+                              .append('title')
+                                .text(function(d) { return d.id; });
+
+                            svg.append('path')
+                                .attr('class', 'state-boundaries')
                                 .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-                                .attr('class', 'state-boundary')
                                 .attr('d', path);
                           });
                       });

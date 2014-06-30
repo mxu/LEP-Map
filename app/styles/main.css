@@ -77,12 +77,23 @@ body {
     border-bottom: 0;
   }
 
-  .land {
-    fill: #333;  
+  path {
+    stroke-linejoin: round;
+    stroke-linecap: round;
   }
 
-  .state-boundary {
+  .state-boundaries {
+    pointer-events: none;
     fill: none;
     stroke: #fff;
+    stroke-width: 1.5px;
+  }
+
+  .states {
+    fill: #333;
+  }
+
+  .states:hover {
+    fill: #e88;
   }
 }
