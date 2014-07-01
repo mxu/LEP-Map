@@ -11,6 +11,7 @@
 angular
   .module('lepMapApp', [
     'lepMapApp.directives',
+    'lepMapApp.services',
     'ngRoute'
   ])
   .config(function ($routeProvider) {
@@ -30,4 +31,5 @@ angular
 
 angular.module('d3', []);
 angular.module('topojson', []);
-angular.module('lepMapApp.directives', ['d3', 'topojson']);
+angular.module('lepMapApp.services', []);
+angular.module('lepMapApp.directives', ['d3', 'topojson', 'lepMapApp.services']);

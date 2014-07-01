@@ -4,10 +4,10 @@ angular.module('lepMapApp.directives')
     .directive('d3Map',
         ['d3Service',
         'topojsonService',
-        function(d3Service, topojsonService) {
+        'stateService',
+        function(d3Service, topojsonService, stateService) {
         return {
             restrict: 'E',
-            scope: { },
             link: function(scope, el) {
                 d3Service.d3().then(function(d3) {
                     topojsonService.topojson().then(function(topojson) {
@@ -44,13 +44,20 @@ angular.module('lepMapApp.directives')
                               .selectAll('path')
                                 .data(topojson.feature(us, us.objects.states).features)
                               .enter().append('path')
+                                .attr('id', function(d) { return 'state_' + d.properties.code; })
                                 .attr('class', 'states')
                                 .attr('d', path)
                                 .on('click', function(d) {
-                                    console.log(d.properties.name);
-                                })
+                                    d3.select('.statesActive')
+                                      .attr('class', 'states');
+
+                                    d3.select('#state_' + d.properties.code)
+                                      .attr('class', 'states statesActive');
+
+                                    stateService.prepForBroadcast(d.properties.name, d.properties.code);
+                                  })
                               .append('title')
-                                .text(function(d) { return d.properties.code; });
+                                .text(function(d) { return d.properties.name; });
 
                             svg.append('path')
                                 .attr('class', 'state-boundaries')

@@ -76,25 +76,33 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
 
-  path {
-    stroke-linejoin: round;
-    stroke-linecap: round;
-  }
+path {
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
 
-  .state-boundaries {
-    pointer-events: none;
-    fill: none;
-    stroke: #fff;
-    stroke-width: .5px;
-  }
+.state-boundaries {
+  pointer-events: none;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
 
-  .states {
-    fill: #222;
-    transition: fill 0.3s;
-  }
+.states {
+  fill: #ccc;
+  transition: fill 0.3s;
+}
 
-  .states:hover {
-    fill: #fd3;
-  }
+.states:hover {
+  fill: #fe8;
+}
+
+.statesActive {
+  fill: #888 !important;
+}
+
+.statesActive:hover {
+  fill: #fd3 !important;
 }
