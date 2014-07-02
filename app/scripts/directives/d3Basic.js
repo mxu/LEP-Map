@@ -48,12 +48,13 @@ angular.module('lepMapApp.directives')
                                 .attr('class', 'states')
                                 .attr('d', path)
                                 .on('click', function(d) {
+                                    // deselect the previously selected state                                  
                                     d3.select('.statesActive')
                                       .attr('class', 'states');
-
+                                    // highlight the selected state
                                     d3.select('#state_' + d.properties.code)
-                                      .attr('class', 'states statesActive');
-
+                                      .attr('class', 'statesActive');
+                                    
                                     stateService.prepForBroadcast(d.properties.name, d.properties.code);
                                   })
                               .append('title')

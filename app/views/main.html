@@ -1,8 +1,21 @@
 <div class="container">
     <d3-map></d3-map>
     <div class="row">
-        <div class="col-md-12">
-            Selected State: {{selectedState}}
+        <div class="col-md-6">
+            State: {{selectedState}}
+        </div>
+        <div class="col-md-6">
+            Congress: <select ng-options="key + value.year for (key, value) in leData" ng-model="selectedCongress" ng-change="selectCongress()">
+            </select>
+        </div>
+    </div>
+    <hr>
+    <div class="row" ng-repeat="rep in repList">
+        <div class="col-md-6">
+            {{rep.thomasName}}
+        </div>
+        <div class="col-md-6">
+            {{rep.les}}
         </div>
     </div>
 </div>
