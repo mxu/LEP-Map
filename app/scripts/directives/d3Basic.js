@@ -26,6 +26,15 @@ angular.module('lepMapApp.directives')
                         .attr('width', width)
                         .attr('height', height);
 
+                        scope.$on('handleBroadcast', function() {
+                          // deselect the previously selected state                                  
+                          d3.select('.statesActive')
+                            .attr('class', 'states');
+                          // highlight the selected state
+                          d3.select('#state_' + stateService.code)
+                            .attr('class', 'statesActive');
+                        });
+
                         d3.json('data/us-states.json', function(error, us) {
                             if(error) { return console.error(error); }
 
@@ -48,14 +57,7 @@ angular.module('lepMapApp.directives')
                                 .attr('class', 'states')
                                 .attr('d', path)
                                 .on('click', function(d) {
-                                    // deselect the previously selected state                                  
-                                    d3.select('.statesActive')
-                                      .attr('class', 'states');
-                                    // highlight the selected state
-                                    d3.select('#state_' + d.properties.code)
-                                      .attr('class', 'statesActive');
-                                    
-                                    stateService.prepForBroadcast(d.properties.name, d.properties.code);
+                                    scope.$apply(stateService.prepForBroadcast(d.properties.code, null));
                                   })
                               .append('title')
                                 .text(function(d) { return d.properties.name; });

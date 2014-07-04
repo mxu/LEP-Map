@@ -2,19 +2,49 @@
     <d3-map></d3-map>
     <div class="row">
         <div class="col-md-6">
-            State: {{selectedState}}
+            <strong>State: {{selectedState}}</strong>
         </div>
         <div class="col-md-6">
-            Congress: <select ng-options="key + value.year for (key, value) in leData" ng-model="selectedCongress" ng-change="selectCongress()">
+            <strong>Congress: </strong><select ng-options="key + value.year for (key, value) in leData" ng-model="selectedCongress" ng-change="selectCongress()">
             </select>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-inline" role="form">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="zip" placeholder="zip">
+                    <span class="input-group-btn"><button class="btn btn-default" ng-click="lookupZip(zip)"><span class="glyphicon glyphicon-search"></span></button></span>
+                </div>
+            </form>
+        </div>
+    </div>
     <hr>
+    <div class="row">
+        <div class="col-md-6">
+            Name
+        </div>
+        <div class="col-md-2">
+            District
+        </div>
+        <div class="col-md-2">
+            Party
+        </div>
+        <div class="col-md-2">
+            LES
+        </div>
+    </div>
     <div class="row" ng-repeat="rep in repList">
         <div class="col-md-6">
             {{rep.thomasName}}
         </div>
-        <div class="col-md-6">
+        <div class="col-md-2">
+            {{rep.cd}}
+        </div>
+        <div class="col-md-2">
+            {{rep.party}}
+        </div>
+        <div class="col-md-2">
             {{rep.les}}
         </div>
     </div>

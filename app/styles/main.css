@@ -96,14 +96,14 @@ path {
 }
 
 .states:hover {
-  fill: #fe8;
+  fill: #88b1f9;
 }
 
 .statesActive {
-  fill: #888;
+  fill: #1e59b1;
   transition: fill 0.3s;
 }
 
 .statesActive:hover {
-  fill: #fd3;
+  fill: #88b1f9;
 }

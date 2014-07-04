@@ -2,15 +2,15 @@
 
 angular
     .module('lepMapApp.services', [])
-    .factory('stateService', function($rootScope) {
+    .factory('stateService', ['$rootScope', function($rootScope) {
         var stateService = {
-            name: '',
-            code: ''
+            code: '',
+            zip: ''
           };
 
-        stateService.prepForBroadcast = function(name, code) {
-            this.name = name;
+        stateService.prepForBroadcast = function(code, zip) {
             this.code = code;
+            this.zip = zip;
             this.broadcastItem();
           };
 
@@ -19,4 +19,4 @@ angular
           };
 
         return stateService;
-      });
+      }]);

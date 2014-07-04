@@ -8,83 +8,152 @@
  * Controller of the lepMapApp
  */
 angular.module('lepMapApp')
-    .controller('MainCtrl', ['$scope', 'stateService', 'd3Service',
-        function($scope, stateService, d3Service) {
-            $scope.selectedState = 'None';
-            $scope.selectedCongress = '';
-            $scope.repList = null;
-            $scope.leData = {};
-            $scope.statusMessage = 'Loading data...';
+  .controller('MainCtrl', ['$scope', '$q', 'stateService', 'd3Service',
+    function($scope, $q, stateService, d3Service) {
+      $scope.selectedState = 'None';
+      $scope.selectedCongress = null;
+      $scope.latestCongress = null;
+      $scope.repList = null;
+      $scope.leData = {};
+      $scope.statusMessage = 'Loading data...';
 
-            d3Service.d3().then(function(d3) {
-                d3.csv('data/congress.csv', function(rows) {
-                    $scope.$apply(function() {
-                        $scope.statusMessage = 'Data loaded';
+      d3Service.d3().then(function(d3) {
 
-                        for (var i = 0; i < rows.length; i++) {
-                            var row = rows[i];
-                            if (parseInt(row.congress) < 100) {
-                                row.congress = '0' + row.congress;
-                            }
-                            if (!$scope.leData.hasOwnProperty(row.congress)) {
-                                $scope.leData[row.congress] = {
-                                    'states': {},
-                                    'year': ' (' + row.year + ')'
-                                };
-                            }
+        function getData(url) {
+          var d = $q.defer();
 
-                            if (!$scope.leData[row.congress].states.hasOwnProperty(row.st_name)) {
-                                $scope.leData[row.congress].states[row.st_name] = [];
-                            }
+          d3.csv(url, function(data) {
+            d.resolve(data);
+          });
 
-                            var member = {
-                                'thomasName': row.thomas_name,
-                                'ssPass': row.ss_pass,
-                                'ssLaw': row.ss_law,
-                                'ssBills': row.ss_bills,
-                                'ssAic': row.ss_aic,
-                                'ssAbc': row.ss_abc,
-                                'sPass': row.s_pass,
-                                'sLaw': row.s_law,
-                                'sBills': row.s_bills,
-                                'sAic': row.s_aic,
-                                'sAbc': row.s_abc,
-                                'id': row.id,
-                                'icpsr': row.icpsr,
-                                'cd': row.cd,
-                                'cPass': row.c_pass,
-                                'cLaw': row.c_law,
-                                'cBills': row.c_bills,
-                                'cAic': row.c_aic,
-                                'cAbc': row.c_abc,
-                                'totalInParty': row['Total in Party'],
-                                'lesInParty': row['LES Rank In Party'],
-                                'les': row.LES,
-                                'expectations': row['Expectations?'],
-                                'democrat': row['Democrat?'],
-                                'benchmark': row.Benchmark
-                            };
-
-                            $scope.leData[row.congress].states[row.st_name].push(member);
-                        }
-
-                        $scope.selectedCongress = $scope.leData['110'];
-                    });
-                });
-            });
-
-            $scope.$on('handleBroadcast', function() {
-                $scope.$apply(function() {
-                    $scope.selectedState = stateService.code;
-                    $scope.selectCongress();
-                });
-            });
-
-            $scope.selectCongress = function() {
-                if ($scope.selectedState === null) {
-                    return;
-                }
-                $scope.repList = $scope.selectedCongress.states[$scope.selectedState];
-            };
+          return d.promise;
         }
-    ]);
+
+        $q.all([
+          getData('data/congress.csv'),
+          getData('data/zip.csv')
+        ]).then(function(data) {
+          var congressData = data[0];
+          var zipData = data[1];
+          var latestCongress = 0;
+
+          window.allData = $scope.leData;
+          window.cData = congressData;
+          window.zData = zipData;
+
+          $scope.statusMessage = 'Data loaded';
+
+          for (var i = 0; i < congressData.length; i++) {
+            var row = congressData[i];
+
+            var congressNum = parseInt(row.congress);
+            if (congressNum < 100) {
+              row.congress = '0' + row.congress;
+            }
+            if (congressNum > latestCongress) {
+              latestCongress = congressNum;
+            }
+            if (!$scope.leData.hasOwnProperty(row.congress)) {
+              $scope.leData[row.congress] = {
+                'states': {},
+                'year': ' (' + row.year + ')'
+              };
+            }
+
+            if (!$scope.leData[row.congress].states.hasOwnProperty(row.st_name)) {
+              $scope.leData[row.congress].states[row.st_name] = [];
+            }
+
+            var member = {
+              'thomasName': row.thomas_name,
+              'ssPass': row.ss_pass,
+              'ssLaw': row.ss_law,
+              'ssBills': row.ss_bills,
+              'ssAic': row.ss_aic,
+              'ssAbc': row.ss_abc,
+              'sPass': row.s_pass,
+              'sLaw': row.s_law,
+              'sBills': row.s_bills,
+              'sAic': row.s_aic,
+              'sAbc': row.s_abc,
+              'id': row.id,
+              'icpsr': row.icpsr,
+              'cd': row.cd,
+              'cPass': row.c_pass,
+              'cLaw': row.c_law,
+              'cBills': row.c_bills,
+              'cAic': row.c_aic,
+              'cAbc': row.c_abc,
+              'totalInParty': row['Total in Party'],
+              'lesInParty': row['LES Rank In Party'],
+              'les': row.LES,
+              'expectations': row['Expectations?'],
+              'party': row['Democrat?'],
+              'benchmark': row.Benchmark
+            };
+
+            $scope.leData[row.congress].states[row.st_name].push(member);
+          }
+          
+          $scope.latestCongress = latestCongress.toString();
+          $scope.selectedCongress = $scope.leData[$scope.latestCongress];
+
+          // loop through each row of zip data
+          for (i = 0; i < zipData.length; i++) {
+            var zRow = zipData[i];
+            // parse zips
+            var zips = zRow.zip.split('-');
+            // find the rep for the given state and district
+            var stateReps = $scope.selectedCongress.states[zRow.state];
+            for (var j = 0; j < stateReps.length; j++) {
+              var rep = stateReps[j];
+              if(rep.cd === zRow.district) {
+                // map list of zips to rep
+                rep.zips = zips;
+              }
+            }
+          }
+
+        });
+      });
+
+      $scope.$on('handleBroadcast', function() {
+        $scope.selectedState = stateService.code;
+        $scope.zip = stateService.zip;
+        $scope.selectCongress();
+      });
+
+      $scope.selectCongress = function() {
+        if ($scope.selectedState === null) {
+          return;
+        }
+        $scope.repList = $scope.selectedCongress.states[$scope.selectedState];
+      };
+
+      $scope.lookupZip = function(zip) {
+        var results = [];
+        var inState = null;
+        $scope.selectedCongress = $scope.leData[$scope.latestCongress];
+        var states = $scope.selectedCongress.states;
+        for(var state in states){
+          if(!states.hasOwnProperty(state)) { continue; }
+          var reps = states[state];
+          for(var i = 0; i < reps.length; i++) {
+            var zips = reps[i].zips;
+            if(zips == null) {
+              // console.log(state + reps[i].cd + ' has no zips');
+              continue;
+            }
+            for(var j = 0; j < zips.length; j++) {
+              if(zips[j] === zip) {
+                results.push(reps[i]);
+                inState = state;
+              }
+            }
+          }
+        }
+        stateService.prepForBroadcast(inState, zip);
+        $scope.repList = results;
+      };
+    }
+  ]);
