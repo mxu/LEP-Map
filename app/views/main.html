@@ -32,13 +32,10 @@
         <div class="col-md-6">
             Name
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             District
         </div>
-        <div class="col-md-2">
-            Party
-        </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             LES
         </div>
     </div>
@@ -47,14 +44,11 @@
             <div class="col-md-6">
                 {{rep.repName}}
             </div>
-            <div class="col-md-2">
-                {{rep.stName}}{{rep.cd}}
+            <div class="col-md-3">
+                {{rep.party.substring(0,1)}}, {{rep.stName}}-{{rep.cd}}
             </div>
-            <div class="col-md-2">
-                {{rep.party.substring(0,3)}}
-            </div>
-            <div class="col-md-2">
-                {{rep.les}}
+            <div class="col-md-3">
+                <p class="text-{{expectText(rep.expect)}}"><span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}"></span> {{rep.les}}</p>
             </div>
         </div>
     </div>

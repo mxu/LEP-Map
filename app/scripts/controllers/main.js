@@ -83,10 +83,10 @@ angular.module('lepMapApp')
               'cAic': row.c_aic,
               'cAbc': row.c_abc,
               'stName': row.st_name,
-              'totalInParty': row['Total in Party'],
-              'lesInParty': row['LES Rank In Party'],
+              'totalInParty': row['Total.in.Party'],
+              'lesInParty': row['LES.Rank.In.Party'],
               'les': row.LES,
-              'expect': row['Expectations?'],
+              'expect': row['Expectations.'],
               'party': row['Democrat.'],
               'benchmark': row.Benchmark
             };
@@ -125,7 +125,7 @@ angular.module('lepMapApp')
       $scope.switchCongress = function() {
         $scope.zip = null;
         $scope.selectCongress();
-      }
+      };
 
       $scope.selectCongress = function() {
         if ($scope.selectedState === null) {
@@ -135,8 +135,32 @@ angular.module('lepMapApp')
         $scope.repList = $scope.selectedCongress.states[$scope.selectedState];
       };
 
+      $scope.expectGlyph = function(str) {
+        str = str.toLowerCase();
+        if(str == 'below expectations') {
+          return 'circle-arrow-down';
+        } else if(str == 'meets expectations') {
+          return 'minus-sign';
+        } else if(str == 'exceeds expectations') {
+          return 'circle-arrow-up';
+        }
+        return 'question-sign';
+      };
+
+      $scope.expectText = function(str) {
+        str = str.toLowerCase();
+        if(str == 'below expectations') {
+          return 'danger';
+        } else if(str == 'meets expectations') {
+          return 'info';
+        } else if(str == 'exceeds expectations') {
+          return 'success';
+        }
+        return 'muted';
+      };
+
       $scope.showRep = function(rep) {
-        alert(rep.repName);
+        
       };
 
       $scope.lookupName = function(repName) {
