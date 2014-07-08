@@ -26,6 +26,7 @@ body {
 
 /* Custom page footer */
 .footer {
+  margin-top: 30px;
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
@@ -87,7 +88,7 @@ path {
   pointer-events: none;
   fill: none;
   stroke: #fff;
-  stroke-width: 1.5px;
+  stroke-width: 1.0px;
 }
 
 .states {
@@ -106,4 +107,14 @@ path {
 
 .statesActive:hover {
   fill: #88b1f9;
+}
+
+.row-rep {
+  padding: 8px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.row-rep:hover {
+  background-color: #88b1f9;
 }

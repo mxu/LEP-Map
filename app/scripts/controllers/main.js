@@ -10,7 +10,7 @@
 angular.module('lepMapApp')
   .controller('MainCtrl', ['$scope', '$q', 'stateService', 'd3Service',
     function($scope, $q, stateService, d3Service) {
-      $scope.selectedState = 'None';
+      $scope.selectedState = null;
       $scope.selectedCongress = null;
       $scope.latestCongress = null;
       $scope.repList = null;
@@ -38,8 +38,6 @@ angular.module('lepMapApp')
           var latestCongress = 0;
 
           window.allData = $scope.leData;
-          window.cData = congressData;
-          window.zData = zipData;
 
           $scope.statusMessage = 'Data loaded';
 
@@ -65,7 +63,7 @@ angular.module('lepMapApp')
             }
 
             var member = {
-              'thomasName': row.thomas_name,
+              'repName': row.thomas_name,
               'ssPass': row.ss_pass,
               'ssLaw': row.ss_law,
               'ssBills': row.ss_bills,
@@ -84,11 +82,12 @@ angular.module('lepMapApp')
               'cBills': row.c_bills,
               'cAic': row.c_aic,
               'cAbc': row.c_abc,
+              'stName': row.st_name,
               'totalInParty': row['Total in Party'],
               'lesInParty': row['LES Rank In Party'],
               'les': row.LES,
-              'expectations': row['Expectations?'],
-              'party': row['Democrat?'],
+              'expect': row['Expectations?'],
+              'party': row['Democrat.'],
               'benchmark': row.Benchmark
             };
 
@@ -123,17 +122,46 @@ angular.module('lepMapApp')
         $scope.selectCongress();
       });
 
+      $scope.switchCongress = function() {
+        $scope.zip = null;
+        $scope.selectCongress();
+      }
+
       $scope.selectCongress = function() {
         if ($scope.selectedState === null) {
           return;
         }
+        // $scope.zip = null;
         $scope.repList = $scope.selectedCongress.states[$scope.selectedState];
       };
+
+      $scope.showRep = function(rep) {
+        alert(rep.repName);
+      };
+
+      $scope.lookupName = function(repName) {
+        var results = [];
+
+        var states = $scope.selectedCongress.states;
+        for(var state in states) {
+          if(!states.hasOwnProperty(state)) { continue; }
+          var reps = states[state];
+          for(var i = 0; i < reps.length; i++) {
+            if(reps[i].repName.toLowerCase().indexOf(repName.toLowerCase()) > -1) {
+              results.push(reps[i]);
+            }
+          }
+        }
+
+        stateService.prepForBroadcast(null, null);
+        $scope.repList = results;
+      }
 
       $scope.lookupZip = function(zip) {
         var results = [];
         var inState = null;
         $scope.selectedCongress = $scope.leData[$scope.latestCongress];
+        
         var states = $scope.selectedCongress.states;
         for(var state in states){
           if(!states.hasOwnProperty(state)) { continue; }
@@ -152,6 +180,7 @@ angular.module('lepMapApp')
             }
           }
         }
+
         stateService.prepForBroadcast(inState, zip);
         $scope.repList = results;
       };
