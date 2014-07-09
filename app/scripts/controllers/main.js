@@ -8,8 +8,8 @@
  * Controller of the lepMapApp
  */
 angular.module('lepMapApp')
-  .controller('MainCtrl', ['$scope', '$q', 'stateService', 'd3Service',
-    function($scope, $q, stateService, d3Service) {
+  .controller('MainCtrl', ['$scope', '$q', '$modal', 'stateService', 'd3Service',
+    function($scope, $q, $modal, stateService, d3Service) {
       $scope.selectedState = null;
       $scope.selectedCongress = null;
       $scope.latestCongress = null;
@@ -64,6 +64,7 @@ angular.module('lepMapApp')
 
             var member = {
               'repName': row.thomas_name,
+              'congress': row.congress,
               'ssPass': row.ss_pass,
               'ssLaw': row.ss_law,
               'ssBills': row.ss_bills,
@@ -160,7 +161,15 @@ angular.module('lepMapApp')
       };
 
       $scope.showRep = function(rep) {
-        
+        $modal.open({
+          templateUrl: 'views/modalContent.html',
+          controller: 'RepModalCtrl',
+          resolve: {
+            rep: function() { return rep; },
+            expectText: function() { return $scope.expectText(rep.expect); },
+            expectGlyph: function() { return $scope.expectGlyph(rep.expect); }
+          }
+        });
       };
 
       $scope.lookupName = function(repName) {
@@ -210,3 +219,10 @@ angular.module('lepMapApp')
       };
     }
   ]);
+
+angular.module('lepMapApp')
+  .controller('RepModalCtrl', function($scope, $modalInstance, rep, expectText, expectGlyph) {
+    $scope.rep = rep;
+    $scope.expectText = expectText;
+    $scope.expectGlyph = expectGlyph;
+  });

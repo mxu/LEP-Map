@@ -1,56 +1,48 @@
-<div class="row">
-    <div class="col-md-8">
-    <d3-map></d3-map>
-    <div class="row">
-        <div class="col-md-3">
-            <select class="form-control input-sm" ng-options="'congress ' + key + ' ' + value.year for (key, value) in leData" ng-model="selectedCongress" ng-change="switchCongress()">
-            </select>
-        </div>
-        <div class="col-md-3">
-            <input type="text" class="form-control input-sm" placeholder="state" ng-model="selectedState" readonly>
-        </div>
-        <div class="col-md-3">
-            <form class="form-inline" role="form">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" ng-model="zip" placeholder="zip">
-                    <span class="input-group-btn"><button class="btn btn-default" ng-click="lookupZip(zip)"><span class="glyphicon glyphicon-search"></span></button></span>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-3">
-            <form class="form-inline" role="form">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" ng-model="repName" placeholder="name">
-                    <span class="input-group-btn"><button class="btn btn-default" ng-click="lookupName(repName)"><span class="glyphicon glyphicon-search"></span></button></span>
-                </div>
-            </form>
-        </div>
-    </div>
-    </div>
-    <div class="col-md-4">
-    <div class="row">
-        <div class="col-md-6">
-            Name
-        </div>
-        <div class="col-md-3">
-            District
-        </div>
-        <div class="col-md-3">
-            LES
-        </div>
-    </div>
-    <div class="row" style="max-height: 500px; overflow-x: hidden; overflow-y: scroll;">
-        <div class="row row-rep" ng-repeat="rep in repList" ng-click="showRep(rep)">
-            <div class="col-md-6">
-                {{rep.repName}}
+<div class="container-fluid">
+    <div class="mapContainer">
+        <div class="row">
+            <div class="col-md-3">
+                <select class="form-control input-sm" ng-options="'congress ' + key + ' ' + value.year for (key, value) in leData" ng-model="selectedCongress" ng-change="switchCongress()">
+                </select>
             </div>
             <div class="col-md-3">
-                {{rep.party.substring(0,1)}}, {{rep.stName}}-{{rep.cd}}
+                <input type="text" class="form-control input-sm" placeholder="state" ng-model="selectedState" readonly>
             </div>
             <div class="col-md-3">
-                <p class="text-{{expectText(rep.expect)}}"><span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}"></span> {{rep.les}}</p>
+                <form class="form-inline" role="form">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" ng-model="zip" placeholder="zip">
+                        <span class="input-group-btn"><button class="btn btn-default" ng-click="lookupZip(zip)"><span class="glyphicon glyphicon-search"></span></button></span>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3">
+                <form class="form-inline" role="form">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" ng-model="repName" placeholder="name">
+                        <span class="input-group-btn"><button class="btn btn-default" ng-click="lookupName(repName)"><span class="glyphicon glyphicon-search"></span></button></span>
+                    </div>
+                </form>
             </div>
         </div>
+        <d3-map></d3-map>
     </div>
+    <div class="repListContainer">
+        <table class="table table-condensed table-hover table-striped table-reps">
+            <thead>
+                <tr>
+                    <th class="col-md-6">Representative</th>
+                    <th class="col-md-3">District</th>
+                    <th class="col-md-3">LES</th>
+                </tr>
+            </thead>
+            <tbody class="tbody-reps">
+                <tr ng-repeat="rep in repList" ng-click="showRep(rep)">
+                    <td class="col-md-6">{{rep.repName}}</td>
+                    <td class="col-md-3">{{rep.party.substring(0,1)}}, {{rep.stName}}-{{rep.cd}}</td>
+                    <td class="col-md-3"><p class="text-{{expectText(rep.expect)}}"><span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}"></span> {{rep.les}}</p></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

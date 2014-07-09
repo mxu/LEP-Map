@@ -10,6 +10,7 @@
  */
 angular
   .module('lepMapApp', [
+    'ui.bootstrap',
     'lepMapApp.directives',
     'lepMapApp.services',
     'ngRoute'

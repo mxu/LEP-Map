@@ -79,6 +79,34 @@ body {
   }
 }
 
+.mapContainer {
+  float: left;
+  padding: 8px;
+  width: 800px;
+}
+
+.repListContainer {
+  margin-left: 800px;
+  width: 400px;
+}
+
+.table-reps {
+  height: 500px;
+  position: relative;
+}
+
+.table-reps tr {
+  width: 100%;
+  display: inline-table;
+}
+
+.tbody-reps {
+  overflow-y: scroll;
+  height: 500px;
+  width: 100%;
+  position: absolute;
+}
+
 path {
   stroke-linejoin: round;
   stroke-linecap: round;
@@ -107,14 +135,4 @@ path {
 
 .statesActive:hover {
   fill: #88b1f9;
-}
-
-.row-rep {
-  padding: 8px;
-  transition: background-color 0.3s;
-  cursor: pointer;
-}
-
-.row-rep:hover {
-  background-color: #88b1f9;
 }

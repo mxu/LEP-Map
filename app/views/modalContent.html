@@ -1,0 +1,52 @@
+<div class="modal-header text-center">
+  <h1>{{rep.repName}}</h1>
+  <h5>({{rep.party.substring(0,1)}}, {{rep.stName}}-{{rep.cd}})</h5>
+  <h5>{{rep.congress}} Congress</h5>
+</div>
+<div class="modal-body">
+  <span class="text-center">
+  <h2>LES: <span class="text-{{expectText}}"><span class="glyphicon glyphicon-{{expectGlyph}}"></span> {{rep.les}}</span></h2>
+</span>
+    <hr>
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th class="col-md-3"></th>
+                <th class="col-md-3">C</th>
+                <th class="col-md-3">S</th>
+                <th class="col-md-3">SS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-md-3">BILL</td>
+                <td class="col-md-3">{{rep.cBills}}</td>
+                <td class="col-md-3">{{rep.sBills}}</td>
+                <td class="col-md-3">{{rep.ssBills}}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">AIC</td>
+                <td class="col-md-3">{{rep.cAic}}</td>
+                <td class="col-md-3">{{rep.sAic}}</td>
+                <td class="col-md-3">{{rep.ssAic}}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">ABC</td>
+                <td class="col-md-3">{{rep.cAbc}}</td>
+                <td class="col-md-3">{{rep.sAbc}}</td>
+                <td class="col-md-3">{{rep.ssAbc}}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">PASS</td>
+                <td class="col-md-3">{{rep.cPass}}</td>
+                <td class="col-md-3">{{rep.sPass}}</td>
+                <td class="col-md-3">{{rep.ssPass}}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">LAW</td>
+                <td class="col-md-3">{{rep.cLaw}}</td>
+                <td class="col-md-3">{{rep.sLaw}}</td>
+                <td class="col-md-3">{{rep.ssLaw}}</td>
+            </tr>
+    </table>
+</div>

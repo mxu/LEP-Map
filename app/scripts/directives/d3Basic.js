@@ -15,7 +15,7 @@ angular.module('lepMapApp.directives')
                             height = 500;
 
                         var projection = d3.geo.albersUsa()
-                            .scale(800)
+                            .scale(1000)
                             .translate([width / 2, height / 2]);
 
                         var path = d3.geo.path()
