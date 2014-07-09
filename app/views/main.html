@@ -31,16 +31,22 @@
         <table class="table table-condensed table-hover table-striped table-reps">
             <thead>
                 <tr>
-                    <th class="col-md-6">Representative</th>
-                    <th class="col-md-3">District</th>
-                    <th class="col-md-3">LES</th>
+                    <th class="col-md-4">Representative</th>
+                    <th class="col-md-4">Party, District</th>
+                    <th class="col-md-4">LES</th>
                 </tr>
             </thead>
             <tbody class="tbody-reps">
                 <tr ng-repeat="rep in repList" ng-click="showRep(rep)">
-                    <td class="col-md-6">{{rep.repName}}</td>
-                    <td class="col-md-3">{{rep.party.substring(0,1)}}, {{rep.stName}}-{{rep.cd}}</td>
-                    <td class="col-md-3"><p class="text-{{expectText(rep.expect)}}"><span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}"></span> {{rep.les}}</p></td>
+                    <td class="col-md-4">
+                        <strong>{{rep.repName}}</strong>
+                    </td>
+                    <td class="col-md-4">
+                        {{rep.party.substring(0,1)}}, {{rep.stName}}-{{rep.cd}}
+                    </td>
+                    <td class="col-md-4">
+                        <p class="text-{{expectText(rep.expect)}}"><span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}"></span> {{rep.les}}</p>
+                    </td>
                 </tr>
             </tbody>
         </table>
