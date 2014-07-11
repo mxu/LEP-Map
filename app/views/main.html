@@ -1,8 +1,30 @@
 <div class="center-block mapContainer">
     <d3-map></d3-map>
 </div>
+<div collapse="helpCollapsed">
+    <div class="well well-lg well-help">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">one</div>
+                <div class="row">two</div>
+                <div class="row">three</div>
+                <div class="row">four</div>
+                <div class="row">five</div>
+                <div class="row">six</div>
+                <div class="row">seven</div>
+            </div>
+            <div class="col-md-9">
+                main content
+            </div>
+        </div>
+    </div>
+</div>
 <div class="center-block repListContainer">
     <div class="row repListControls">
+        <div class="col-md-1">
+            <h5>Help</h5>
+            <button class="btn btn-default btn-sm" ng-click="helpCollapsed = !helpCollapsed">Help</button>
+        </div>
         <div class="col-md-2">
             <h5>Selected Congress</h5>
             <select class="form-control input-sm" ng-options="key + ' ' + value.year for (key, value) in leData" ng-model="selectedCongress" ng-change="switchCongress()">
@@ -31,7 +53,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-3 col-md-offset-1">
+        <div class="col-md-3">
             <h5>Download Congress Data</h5>
             <div class="btn-group btn-group-sm">
                 <button class="btn btn-success">Selected</button>

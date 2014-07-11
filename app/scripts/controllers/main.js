@@ -23,6 +23,7 @@ angular.module('lepMapApp')
       window.leData = $scope.leData;
       $scope.orderByField = 'repName';
       $scope.reverseSort = false;
+      $scope.helpCollapsed = true;
       $scope.statusMessage = 'Loading data...';
 
       // wait for D3 to load
@@ -171,11 +172,11 @@ angular.module('lepMapApp')
       $scope.expectGlyph = function(str) {
         str = str.toLowerCase();
         if (str === 'below expectations') {
-          return 'remove-circle';
+          return 'remove-sign';
         } else if (str === 'meets expectations') {
-          return 'record';
+          return 'ok-sign';
         } else if (str === 'exceeds expectations') {
-          return 'ok-circle';
+          return 'plus-sign';
         }
         return 'question-sign';
       };

@@ -37,6 +37,10 @@ angular
         templateUrl: 'views/research.html',
         controller: 'ResearchCtrl'
       })
+      .when('/media', {
+        templateUrl: 'views/media.html',
+        controller: 'MediaCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
