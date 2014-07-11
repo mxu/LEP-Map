@@ -20,6 +20,9 @@ angular.module('lepMapApp')
       $scope.latestCongress = null;
       $scope.repList = null;
       $scope.leData = {};
+      window.leData = $scope.leData;
+      $scope.orderByField = 'repName';
+      $scope.reverseSort = false;
       $scope.statusMessage = 'Loading data...';
 
       // wait for D3 to load
@@ -55,7 +58,7 @@ angular.module('lepMapApp')
           for (var i = 0; i < congressData.length; i++) {
             var row = congressData[i];
             // update most recent congress number
-            var congressNum = parseInt(row.congress);
+            var congressNum = parseInt(row.congress, 10);
             if (congressNum < 100) {
               row.congress = '0' + row.congress;
             }
@@ -74,18 +77,19 @@ angular.module('lepMapApp')
               $scope.leData[row.congress].states[row.st_name] = [];
             }
             // copy all the row data into a new representative object within the state
+            /*jshing camelcase: false */
             var newRep = {
               'id': row.id,
               'congress': row.congress,
               'stName': row.st_name,
-              'cd': row.cd,
+              'cd': getFloat(row.cd),
               'repName': row.thomas_name,
               'party': row['Democrat.'],
               'les': getFloat(row.LES),
               'benchmark': getFloat(row.Benchmark),
               'expect': row['Expectations.'],
-              'totalInParty': row['Total.in.Party'],
-              'lesInParty': row['LES.Rank.In.Party'],
+              'totalInParty': getFloat(row['Total.in.Party']),
+              'partyRank': getFloat(row['LES.Rank.In.Party']),
               'icpsr': row.icpsr,
               // substantive and significant
               'ssPass': row.ss_pass,
@@ -123,7 +127,7 @@ angular.module('lepMapApp')
             var stateReps = $scope.selectedCongress.states[zRow.state];
             for (var j = 0; j < stateReps.length; j++) {
               var rep = stateReps[j];
-              if (rep.cd === zRow.district) {
+              if (rep.cd === parseInt(zRow.district)) {
                 // map list of zips to rep
                 rep.zips = zips;
               }
@@ -139,7 +143,7 @@ angular.module('lepMapApp')
       $scope.$on('handleBroadcast', function() {
         $scope.selectedState = stateService.code;
         $scope.zip = stateService.zip;
-        if (stateService.code != null) {
+        if (stateService.code !== null) {
           $scope.repName = null;
         }
         $scope.selectCongress();
@@ -148,7 +152,7 @@ angular.module('lepMapApp')
       // performa a new lookup when a new congress is selected
       $scope.switchCongress = function() {
         $scope.zip = null;
-        if ($scope.repName != null) {
+        if ($scope.repName !== null) {
           $scope.lookupName($scope.repName);
         } else {
           $scope.selectCongress();
@@ -157,7 +161,7 @@ angular.module('lepMapApp')
 
       // update list of representatives
       $scope.selectCongress = function() {
-        if ($scope.selectedState == null) {
+        if ($scope.selectedState === null) {
           $scope.repList = null;
         }
         $scope.repList = $scope.selectedCongress.states[$scope.selectedState];
@@ -166,11 +170,11 @@ angular.module('lepMapApp')
       // return glyph name based on expectation status
       $scope.expectGlyph = function(str) {
         str = str.toLowerCase();
-        if (str == 'below expectations') {
+        if (str === 'below expectations') {
           return 'remove-circle';
-        } else if (str == 'meets expectations') {
+        } else if (str === 'meets expectations') {
           return 'record';
-        } else if (str == 'exceeds expectations') {
+        } else if (str === 'exceeds expectations') {
           return 'ok-circle';
         }
         return 'question-sign';
@@ -179,11 +183,11 @@ angular.module('lepMapApp')
       // return text style based on expectation status
       $scope.expectText = function(str) {
         str = str.toLowerCase();
-        if (str == 'below expectations') {
+        if (str === 'below expectations') {
           return 'danger';
-        } else if (str == 'meets expectations') {
+        } else if (str === 'meets expectations') {
           return 'info';
-        } else if (str == 'exceeds expectations') {
+        } else if (str === 'exceeds expectations') {
           return 'success';
         }
         return 'muted';
@@ -194,6 +198,7 @@ angular.module('lepMapApp')
         $modal.open({
           templateUrl: 'views/modalContent.html',
           controller: 'RepModalCtrl',
+          size: 'sm',
           resolve: {
             rep: function() {
               return rep;
@@ -210,6 +215,7 @@ angular.module('lepMapApp')
 
       // look up representative within the current congress by name
       $scope.lookupName = function(repName) {
+        var repStrs = repName.toLowerCase().split(' ');
         var results = [];
         // loop through each state of the currently selected congress
         var states = $scope.selectedCongress.states;
@@ -217,10 +223,15 @@ angular.module('lepMapApp')
           var reps = states[state];
           // loop through each representative within the current state
           for (var i = 0; i < reps.length; i++) {
-            if (reps[i].repName.toLowerCase().indexOf(repName.toLowerCase()) > -1) {
-              // add reps whose name contains the search string
-              results.push(reps[i]);
+            var matches = true;
+            for (var j = 0; j < repStrs.length; j++) {
+              var repStr = repStrs[j];
+              if (reps[i].repName.toLowerCase().indexOf(repStr) === -1) {
+                matches = false;
+              }
             }
+            // add reps whose name matches all search strings
+            if(matches) { results.push(reps[i]); }
           }
         }
         // deselect state and zip
@@ -229,23 +240,23 @@ angular.module('lepMapApp')
         $scope.repList = results;
       };
 
-// look up representative within the latest congress by zip
+      // look up representative within the latest congress by zip
       $scope.lookupZip = function(zip) {
         var results = [];
         var inState = null;
         // select the latest congress
         $scope.selectedCongress = $scope.leData[$scope.latestCongress];
-// loop through each state
+        // loop through each state
         var states = $scope.selectedCongress.states;
         for (var state in states) {
           // loop through each rep
           var reps = states[state];
           for (var i = 0; i < reps.length; i++) {
-            var zips = reps[i].zips;
-            if (zips == null) {
-              // console.log(state + reps[i].cd + ' has no zips');
+            if (!reps[i].hasOwnProperty('zips')) {
+              console.log(state + reps[i].cd + ' has no zips');
               continue;
             }
+            var zips = reps[i].zips;
             // loop through zips associate with the rep
             for (var j = 0; j < zips.length; j++) {
               if (zips[j] === zip) {
@@ -270,4 +281,8 @@ angular.module('lepMapApp')
     $scope.rep = rep;
     $scope.expectText = expectText;
     $scope.expectGlyph = expectGlyph;
+
+    $scope.close = function() {
+      $modalInstance.dismiss();
+    };
   });

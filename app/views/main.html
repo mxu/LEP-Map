@@ -1,54 +1,116 @@
-<div class="container-fluid">
-    <div class="mapContainer">
-        <div class="row">
-            <div class="col-md-3">
-                <select class="form-control input-sm" ng-options="'congress ' + key + ' ' + value.year for (key, value) in leData" ng-model="selectedCongress" ng-change="switchCongress()">
-                </select>
-            </div>
-            <div class="col-md-3">
-                <input type="text" class="form-control input-sm" placeholder="state" ng-model="selectedState" readonly>
-            </div>
-            <div class="col-md-3">
-                <form class="form-inline" role="form">
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" ng-model="zip" placeholder="zip">
-                        <span class="input-group-btn"><button class="btn btn-default" ng-click="lookupZip(zip)"><span class="glyphicon glyphicon-search"></span></button></span>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-3">
-                <form class="form-inline" role="form">
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" ng-model="repName" placeholder="name">
-                        <span class="input-group-btn"><button class="btn btn-default" ng-click="lookupName(repName)"><span class="glyphicon glyphicon-search"></span></button></span>
-                    </div>
-                </form>
+<div class="center-block mapContainer">
+    <d3-map></d3-map>
+</div>
+<div class="center-block repListContainer">
+    <div class="row repListControls">
+        <div class="col-md-2">
+            <h5>Selected Congress</h5>
+            <select class="form-control input-sm" ng-options="key + ' ' + value.year for (key, value) in leData" ng-model="selectedCongress" ng-change="switchCongress()">
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <h5>Selected State</h5>
+            <input type="text" class="form-control input-sm" placeholder="state" ng-model="selectedState" readonly>
+        </div>
+        <div class="col-md-2">
+            <h5>Search By Zip</h5>
+            <form class="form-inline" role="form">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" ng-model="zip" placeholder="zip">
+                    <span class="input-group-btn"><button class="btn btn-default" ng-click="lookupZip(zip)"><span class="glyphicon glyphicon-search"></span></button></span>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-2">
+            <h5>Search By Name</h5>
+            <form class="form-inline" role="form">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" ng-model="repName" placeholder="name">
+                    <span class="input-group-btn"><button class="btn btn-default" ng-click="lookupName(repName)"><span class="glyphicon glyphicon-search"></span></button></span>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            <h5>Download Congress Data</h5>
+            <div class="btn-group btn-group-sm">
+                <button class="btn btn-success">Selected</button>
+                <button class="btn btn-success">All (Book)</button>
+                <button class="btn btn-success">All (Current)</button>
             </div>
         </div>
-        <d3-map></d3-map>
     </div>
-    <div class="repListContainer">
-        <table class="table table-condensed table-hover table-striped table-reps">
-            <thead>
-                <tr>
-                    <th class="col-md-4">Representative</th>
-                    <th class="col-md-4">Party, District</th>
-                    <th class="col-md-4">LES</th>
-                </tr>
-            </thead>
-            <tbody class="tbody-reps">
-                <tr ng-repeat="rep in repList" ng-click="showRep(rep)">
-                    <td class="col-md-4">
-                        <strong>{{rep.repName}}</strong>
-                    </td>
-                    <td class="col-md-4">
-                        {{rep.party.substring(0,1)}}, {{rep.stName}}-{{rep.cd}}
-                    </td>
-                    <td class="col-md-4">
-                        <p class="text-{{expectText(rep.expect)}}"><span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}"></span> {{rep.les}}</p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-hover table-condensed table-striped table-reps">
+        <thead>
+            <tr>
+                <th class="col-md-3">
+                    <a ng-click="orderByField='repName'; reverseSort = !reverseSort">
+                        Representative
+                    </a> 
+                    <span ng-show="orderByField==='repName'"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-alphabet"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></span>
+                </th>
+                <th class="col-md-1">
+                    <a ng-click="orderByField='party'; reverseSort = !reverseSort">
+                        Party
+                    </a> 
+                    <span ng-show="orderByField==='party'"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-alphabet"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></span>
+                </th>
+                <th class="col-md-1">
+                    <a ng-click="orderByField='stName'; reverseSort = !reverseSort">
+                        State
+                    </a> 
+                    <span ng-show="orderByField==='stName'"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-alphabet"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></span>
+                </th>
+                <th class="col-md-1">
+                    <a ng-click="orderByField='cd'; reverseSort = !reverseSort">
+                        District
+                    </a> 
+                    <span ng-show="orderByField==='cd'"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-order"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-order-alt"></span></span>
+                </th>
+                <th class="col-md-2">
+                    <a ng-click="orderByField=['party', 'partyRank']; reverseSort = !reverseSort">
+                        Party Rank
+                    </a> 
+                    <span ng-show="orderByField.indexOf('partyRank') > -1"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-order"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-order-alt"></span></span>
+                </th>
+                <th class="col-md-2">
+                    <a ng-click="orderByField='benchmark'; reverseSort = !reverseSort">
+                        Benchmark
+                    </a> 
+                    <span ng-show="orderByField==='benchmark'"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-attributes"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-attributes-alt"></span></span>
+                </th>
+                <th class="col-md-2">
+                    <a ng-click="orderByField='les'; reverseSort = !reverseSort">
+                        LES
+                    </a> 
+                    <span ng-show="orderByField==='les'"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-attributes"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-attributes-alt"></span></span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="rep in repList|orderBy:orderByField:reverseSort">
+                <td class="col-md-3">
+                    <strong><a ng-click="showRep(rep)">{{rep.repName}}</a></strong>
+                </td>
+                <td class="col-md-1">
+                    {{rep.party.substring(0,3)}}
+                </td>
+                <td class="col-md-1">
+                    {{rep.stName}}
+                </td>
+                <td class="col-md-1">
+                    {{rep.cd}}
+                </td>
+                <td class="col-md-2">
+                    {{rep.partyRank}} / {{rep.totalInParty}}
+                </td>
+                <td class="col-md-2">
+                    {{rep.benchmark}}
+                </td>
+                <td class="col-md-2">
+                    <span class="text-{{expectText(rep.expect)}}"><span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}"></span> {{rep.les}}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

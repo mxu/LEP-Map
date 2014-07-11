@@ -1,11 +1,12 @@
 <div class="modal-header text-center">
-  <h1>{{rep.repName}}</h1>
-  <h5>({{rep.party.substring(0,1)}}, {{rep.stName}}-{{rep.cd}})</h5>
-  <h5>{{rep.congress}} Congress</h5>
+  <h3>{{rep.repName}}</h3>
+  <strong>({{rep.party.substring(0,1)}}, {{rep.stName}}-{{rep.cd}})</strong>
+  <br>
+  <strong>{{rep.congress}} Congress</strong>
 </div>
 <div class="modal-body">
   <span class="text-center">
-  <h2>LES: <span class="text-{{expectText}}"><span class="glyphicon glyphicon-{{expectGlyph}}"></span> {{rep.les}}</span></h2>
+  <h4>LES: <span class="text-{{expectText}}"><span class="glyphicon glyphicon-{{expectGlyph}}"></span> {{rep.les}}</span></h4>
 </span>
     <hr>
     <table class="table table-condensed table-bordered">
@@ -49,4 +50,7 @@
                 <td class="col-md-3">{{rep.ssLaw}}</td>
             </tr>
     </table>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="close()">Close</button>
 </div>

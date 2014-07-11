@@ -25,6 +25,18 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
+      .when('/book', {
+        templateUrl: 'views/book.html',
+        controller: 'BookCtrl'
+      })
+      .when('/method', {
+        templateUrl: 'views/method.html',
+        controller: 'MethodCtrl'
+      })
+      .when('/research', {
+        templateUrl: 'views/research.html',
+        controller: 'ResearchCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
