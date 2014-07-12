@@ -11,6 +11,8 @@
 angular
   .module('lepMapApp', [
     'ui.bootstrap',
+    'mgcrea.ngStrap.helpers.dimensions',
+    'mgcrea.ngStrap.affix',
     'lepMapApp.directives',
     'lepMapApp.services',
     'ngRoute'

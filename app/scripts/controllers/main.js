@@ -23,7 +23,7 @@ angular.module('lepMapApp')
       window.leData = $scope.leData;
       $scope.orderByField = 'repName';
       $scope.reverseSort = false;
-      $scope.helpCollapsed = true;
+      $scope.helpCollapsed = false;
       $scope.statusMessage = 'Loading data...';
 
       // wait for D3 to load
@@ -136,7 +136,7 @@ angular.module('lepMapApp')
           }
 
           // select Washington
-          stateService.prepForBroadcast('WA', null);
+          stateService.prepForBroadcast('CA', null);
         });
       });
 
@@ -276,6 +276,31 @@ angular.module('lepMapApp')
       };
     }
   ]);
+
+angular.module('lepMapApp')
+  .controller('AboutCtrl', function($scope) {
+    $scope.data = '';
+  });
+
+angular.module('lepMapApp')
+.controller('BookCtrl', function($scope) {
+  $scope.data = '';
+});
+
+angular.module('lepMapApp')
+.controller('MethodCtrl', function($scope) {
+  $scope.data = '';
+});
+
+angular.module('lepMapApp')
+.controller('ResearchCtrl', function($scope) {
+  $scope.data = '';
+});
+
+angular.module('lepMapApp')
+.controller('MediaCtrl', function($scope) {
+  $scope.data = '';
+});
 
 angular.module('lepMapApp')
   .controller('RepModalCtrl', function($scope, $modalInstance, rep, expectText, expectGlyph) {

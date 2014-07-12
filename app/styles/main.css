@@ -1,112 +1,131 @@
-/* Space out content a bit */
+/* HEADER */
+
+.navbar {
+  border-bottom: 4px solid #c00;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 1);
+}
+
 body {
-  padding-top: 56px;
-  padding-bottom: 20px;
+  padding-top: 50px;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
+/* PAGE FOOTER */
+
+.footer-container {
+  background-color: #444;
+}
+
 .footer {
-  padding-left: 15px;
-  padding-right: 15px;
+  color: #888;
+  padding: 32px 32px 128px 32px;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
+/* MAP */
+
+.container-map {
+  background-color: #224;
+  width: auto;
 }
 
-/* Custom page footer */
-.footer {
-  margin-top: 30px;
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-}
-
-.mapContainer {
+.d3-map {
+  line-height: 0;
   width: 800px;
 }
 
-.helpContainer {
-
+path {
+  stroke-linejoin: round;
+  stroke-linecap: round;
 }
 
-.repListContainer {
-  width: 1000px;
-  height: 640px;
-  overflow: visible;
+.state-boundaries {
+  pointer-events: none;
+  fill: none;
+  stroke: #224;
+  stroke-width: 1.5px;
+}
+
+.states {
+  fill: #fff;
+  transition: fill 0.3s;
+}
+
+.states:hover {
+  fill: #f88;
+}
+
+.statesActive {
+  fill: #c33;
+  transition: fill 0.3s;
+}
+
+.statesActive:hover {
+  fill: #f88;
+}
+
+/* CONTROLS */
+
+.container-controls {
+  background-color: #E4E5F6;
+  padding-bottom: 16px;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
+  position: absolute !important;
+  width: 100%;
+  top: 550px;
+  z-index: 10;
 }
 
 .repListControls {
+  margin-top: 32px;
   margin-bottom: 16px;
 }
 
-.table-reps {
+.affix {
+  position: fixed !important;
+  top: 54px !important;
   width: 100%;
-  position: relative;
-  overflow: visible;
+  z-index: 10;
+}
+
+/* HELP BOX */
+
+.container-help {
+}
+
+.well-help {
+  margin-bottom: 0;
+  height: 340px;
+}
+
+.well-help .nav {
+  float: left;
+  width: 260px;
+}
+
+.well-help .tab-content {
+  padding-left: 300px;
+}
+
+/* LIST */
+
+.container-rep-list {
+  padding-top: 162px;
+  padding-bottom: 32px;
+  background-color: #fff;
+}
+
+.container-rep-list > .container {
+}
+
+.table-reps {
 }
 
 .table-reps tr {
-  width: 100%;
-  display: inline-table;
 }
 
 .table-reps thead,
 .table-reps tbody {
-  position: absolute;
-  overflow-y: scroll;
   width: 100%;
+  display: inline-table;
 }
 
 .table-reps thead a {
@@ -119,37 +138,4 @@ body {
   user-select: none;
 }
 
-.table-reps tbody {
-  height: 560px;
-  margin-top: 32px;
-}
 
-path {
-  stroke-linejoin: round;
-  stroke-linecap: round;
-}
-
-.state-boundaries {
-  pointer-events: none;
-  fill: none;
-  stroke: #fff;
-  stroke-width: 1.0px;
-}
-
-.states {
-  fill: #ccc;
-  transition: fill 0.3s;
-}
-
-.states:hover {
-  fill: #88b1f9;
-}
-
-.statesActive {
-  fill: #1e59b1;
-  transition: fill 0.3s;
-}
-
-.statesActive:hover {
-  fill: #88b1f9;
-}

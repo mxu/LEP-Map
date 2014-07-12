@@ -8,6 +8,8 @@ angular.module('lepMapApp.directives')
         function(d3Service, topojsonService, stateService) {
         return {
             restrict: 'E',
+            template: '<div class="center-block d3-map"></div>',
+            replace: true,
             link: function(scope, el) {
                 d3Service.d3().then(function(d3) {
                     topojsonService.topojson().then(function(topojson) {
