@@ -6,17 +6,12 @@
 <div class="container-fluid container-controls" data-animation="am-fade-and-slide-top" data-offset-top="497" bs-affix>
     <div class="container">
         <div class="row repListControls">
-            <div class="col-md-1">
-                <h5>Glossary</h5>
-                <button class="btn btn-default btn-sm" ng-click="helpCollapsed = !helpCollapsed">{{helpCollapsed?'Open':'Close'}}</button>
-            </div>
             <div class="col-md-3">
                 <h5>Selected Congress</h5>
                 <select class="form-control input-sm" ng-options="key + ' ' + value.year for (key, value) in leData" ng-model="selectedCongress" ng-change="switchCongress()">
                 </select>
             </div>
-
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <h5>Selected State</h5>
                 <input type="text" class="form-control input-sm" placeholder="state" ng-model="selectedState" readonly>
             </div>
@@ -39,120 +34,97 @@
                 </form>
             </div>
         </div>
-        <div collapse="helpCollapsed">
-            <div class="well well-lg well-help">
-                <tabset vertical="true" type="pills">
-                    <tab heading="Legislative Effectiveness Score">
-                        <p>The Legislative Effectiveness Score (LES) is a summary measure that captures how successful each member of the House of Representatives is, in a given two-year Congress, at moving her agenda items, which are coded for their relative substantive significance, through the different steps of the legislative process, which begins with introducing a bill into the House until it (possibly) becomes law.</p>
-                    </tab>
-                    <tab heading="Benchmark Score">
-                        <p>The Benchmark Score for a member of the House of Representatives is the expected Legislative Effectiveness Score for a Representative in a given Congress who is of the same political party, has served the same number of terms in Congress, and has held the same number of Committee and/or Subcommittee Chairmanships as the given member.</p>
-                    </tab>
-                    <tab heading="Below Expectations">
-                        <p>A Representative’s Legislative Effectiveness Score is denoted as being “<span class="glyphicon glyphicon-{{expectGlyph('below expectations')}} text-{{expectText('below expectations')}}"></span> Below Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is lower than .50.</p>
-                    </tab>
-                    <tab heading="Meets Expectations">
-                        <p>A Representative’s Legislative Effectiveness Score is denoted as “<span class="glyphicon glyphicon-{{expectGlyph('meets expectations')}} text-{{expectText('meets expectations')}}"></span> Meets Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is between .50 and 1.50.</p>
-                    </tab>
-                    <tab heading="Above Expectations">
-                        <p>A Representative’s Legislative Effectiveness Score is denoted as being “<span class="glyphicon glyphicon-{{expectGlyph('exceeds expectations')}} text-{{expectText('exceeds expectations')}}"></span> Above Expectations” if the ration of her Legislative Effectiveness Score to her Benchmark Score is greater than 1.50.</p>
-                    </tab>
-                    <tab heading="Rank in Party">
-                        <p>The Rank in Party is the numerical ranking of a member of the House of Representative’s Legislative Effectiveness Score in comparison to other members of her political party in a given two-year Congress, where “1” connotes the highest Legislative Effectiveness Score.</p>
-                    </tab>
-                    <tab heading="Legislative Effectiveness Scorecard">
-                        <p>A Legislative Effectiveness Scorecard identifies for a given member of the House of Representatives in a given Congress her Legislative Effectiveness Score, and within that congress: how many bills that she introduced (BILL), how many of those bills received some sort of Action in Committee (AIC) and/or Action beyond Committee (ABC), how many of those bills passed the House (PASS) and how many of those bills ultimately became Law (LAW).  Moreover, the Legislative Effectiveness Scorecard also identifies, for each bill in each stage of the legislative process, how many bills were Commemorative (C), Substantive (S), or Substantive and Significant (SS).</p>
-                    </tab>
-                    <tab heading="Commemorative Bills">
-                        <p>A bill is denoted as “Commemorative (C)” if it the substance of the legislation satisfies one of several criteria deeming it as commemorative or symbolic in purpose, such as the naming and/or renaming of public buildings, the striking of commemorative coins and medals, and related matters.</p>
-                    </tab>
-                    <tab heading="Substantive Bills">
-                        <p>A bill is denoted as “Substantive (S)” if it is neither Commemorative or Substantive and Significant, according to our coding protocol; or, if it would have been denoted as Commemorative, but it was mentioned in an end-of-the-year write-up in the Congressional Quarterly (CQ) Almanac that corresponds to the relevant Congress.</p>
-                    </tab>
-                    <tab heading="Substantive and Significant Bills">
-                        <p>A bill is denoted as “Substantive and Significant (SS)” if the bill is mentioned in an end-of-the-year write-up in the Congressional Quarterly (CQ) Almanac that corresponds to the relevant Congress.</p>
-                    </tab>
-                </tabset>
+        <div class="row repListHeader">
+            <div class="col-md-3">
+                <a ng-click="orderByField='repName'; reverseSort = !reverseSort">
+                    Representative
+                </a> 
+                <span ng-show="orderByField==='repName'">
+                    <span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                    <span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                </span>
+            </div>
+            <div class="col-md-1">
+                <a ng-click="orderByField='party'; reverseSort = !reverseSort">
+                    Party
+                </a> 
+                <span ng-show="orderByField==='party'">
+                    <span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                    <span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                </span>
+            </div>
+            <div class="col-md-1">
+                <a ng-click="orderByField='stName'; reverseSort = !reverseSort">
+                    State
+                </a> 
+                <span ng-show="orderByField==='stName'">
+                    <span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                    <span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                </span>
+            </div>
+            <div class="col-md-1">
+                <a ng-click="orderByField='cd'; reverseSort = !reverseSort">
+                    District
+                </a> 
+                <span ng-show="orderByField==='cd'">
+                    <span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-order"></span>
+                    <span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-order-alt"></span>
+                </span>
+            </div>
+            <div class="col-md-2">
+                <a ng-click="orderByField=['party', 'partyRank']; reverseSort = !reverseSort" popover="The Rank in Party is the numerical ranking of a member of the House of Representative’s Legislative Effectiveness Score in comparison to other members of her political party in a given two-year Congress, where “1” connotes the highest Legislative Effectiveness Score." popover-trigger="mouseenter" popover-placement="bottom">
+                    Party Rank
+                </a> 
+                <span ng-show="orderByField.indexOf('partyRank') > -1">
+                    <span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-order"></span>
+                    <span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-order-alt"></span>
+                </span>
+            </div>
+            <div class="col-md-2">
+                <a ng-click="orderByField='benchmark'; reverseSort = !reverseSort" popover="The Benchmark Score for a member of the House of Representatives is the expected Legislative Effectiveness Score for a Representative in a given Congress who is of the same political party, has served the same number of terms in Congress, and has held the same number of Committee and/or Subcommittee Chairmanships as the given member." popover-trigger="mouseenter" popover-placement="bottom">
+                    Benchmark
+                </a> 
+                <span ng-show="orderByField==='benchmark'">
+                    <span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-attributes"></span>
+                    <span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                </span>
+            </div>
+            <div class="col-md-2">
+                <a ng-click="orderByField='les'; reverseSort = !reverseSort" popover="The Legislative Effectiveness Score (LES) is a summary measure that captures how successful each member of the House of Representatives is, in a given two-year Congress, at moving her agenda items, which are coded for their relative substantive significance, through the different steps of the legislative process, which begins with introducing a bill into the House until it (possibly) becomes law." popover-trigger="mouseenter" popover-placement="bottom">
+                    LES
+                </a> 
+                <span ng-show="orderByField==='les'">
+                    <span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-attributes"></span>
+                    <span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                </span>
             </div>
         </div>
     </div>
 </div>
 <div class="container-fluid container-rep-list">
     <div class="container">
-        <div class="row"><div class="col-md-12">
-        <table width="100%" class="center-block table table-hover table-condensed table-striped table-reps">
-            <thead>
-                <tr>
-                    <th class="col-md-3">
-                        <a ng-click="orderByField='repName'; reverseSort = !reverseSort">
-                            Representative
-                        </a> 
-                        <span ng-show="orderByField==='repName'"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-alphabet"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></span>
-                    </th>
-                    <th class="col-md-1">
-                        <a ng-click="orderByField='party'; reverseSort = !reverseSort">
-                            Party
-                        </a> 
-                        <span ng-show="orderByField==='party'"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-alphabet"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></span>
-                    </th>
-                    <th class="col-md-1">
-                        <a ng-click="orderByField='stName'; reverseSort = !reverseSort">
-                            State
-                        </a> 
-                        <span ng-show="orderByField==='stName'"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-alphabet"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></span>
-                    </th>
-                    <th class="col-md-1">
-                        <a ng-click="orderByField='cd'; reverseSort = !reverseSort">
-                            District
-                        </a> 
-                        <span ng-show="orderByField==='cd'"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-order"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-order-alt"></span></span>
-                    </th>
-                    <th class="col-md-2">
-                        <a ng-click="orderByField=['party', 'partyRank']; reverseSort = !reverseSort">
-                            Party Rank
-                        </a> 
-                        <span ng-show="orderByField.indexOf('partyRank') > -1"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-order"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-order-alt"></span></span>
-                    </th>
-                    <th class="col-md-2">
-                        <a ng-click="orderByField='benchmark'; reverseSort = !reverseSort">
-                            Benchmark
-                        </a> 
-                        <span ng-show="orderByField==='benchmark'"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-attributes"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-attributes-alt"></span></span>
-                    </th>
-                    <th class="col-md-2">
-                        <a ng-click="orderByField='les'; reverseSort = !reverseSort">
-                            LES
-                        </a> 
-                        <span ng-show="orderByField==='les'"><span ng-show="!reverseSort" class="glyphicon glyphicon-sort-by-attributes"></span><span ng-show="reverseSort" class="glyphicon glyphicon-sort-by-attributes-alt"></span></span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="rep in repList|orderBy:orderByField:reverseSort">
-                    <td class="col-md-3">
-                        <strong><a ng-click="showRep(rep)">{{rep.repName}}</a></strong>
-                    </td>
-                    <td class="col-md-1">
-                        {{rep.party.substring(0,3)}}
-                    </td>
-                    <td class="col-md-1">
-                        {{rep.stName}}
-                    </td>
-                    <td class="col-md-1">
-                        {{rep.cd}}
-                    </td>
-                    <td class="col-md-2">
-                        {{rep.partyRank}} / {{rep.totalInParty}}
-                    </td>
-                    <td class="col-md-2">
-                        {{rep.benchmark}}
-                    </td>
-                    <td class="col-md-2">
-                        <span class="text-{{expectText(rep.expect)}}"><span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}"></span> {{rep.les}}</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        </div></div>
+        <div class="row repListRow" ng-repeat="rep in repList|orderBy:orderByField:reverseSort">
+            <div class="col-md-3">
+                <strong><a ng-click="showRep(rep)">{{rep.repName}}</a></strong>
+            </div>
+            <div class="col-md-1">
+                {{rep.party.substring(0,3)}}
+            </div>
+            <div class="col-md-1">
+                {{rep.stName}}
+            </div>
+            <div class="col-md-1">
+                {{rep.cd}}
+            </div>
+            <div class="col-md-2">
+                {{rep.partyRank}} / {{rep.totalInParty}}
+            </div>
+            <div class="col-md-2">
+                {{rep.benchmark}}
+            </div>
+            <div class="col-md-2">
+                <span class="text-{{expectText(rep.expect)}}"><span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}" popover="{{expectTooltip(rep.expect)}}" popover-trigger="mouseenter" popover-placement="left"></span> {{rep.les}}</span>
+            </div>
+        </div>
     </div>
 </div>

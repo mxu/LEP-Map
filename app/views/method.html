@@ -1,42 +1,46 @@
-<h2>The Methodology Explained</h2>
-<h3>Methodological Caveat</h3>
+<div class="container-fluid">
+    <div class="container">
+        <h2>The Methodology Explained</h2>
+        <h3>Methodological Caveat</h3>
 
-<h3>Collecting Data</h3>
-<p>
-    To generate the Legislative Effectiveness Score, and related metrics, we rely on computer code written to collect all relevant information from the Library of Congress website, THOMAS, for every public house bill (H.R.) that was introduced into the 93rd - 112th Congresses (1973-2012).  For every bill, we identify the sponsor and every step in the legislative process as identified in the “All Congressional Actions with Amendments” section of the bill’s “summary and status” hyperlink.  After collecting this information, we code the dates and incidence of each major stage of each bill’s progression through the legislative life cycle, which serves as the foundation for our metrics.
-</p>
-<h3>Defining Relevant Outcomes</h3>
+        <h3>Collecting Data</h3>
+        <p>
+            To generate the Legislative Effectiveness Score, and related metrics, we rely on computer code written to collect all relevant information from the Library of Congress website, THOMAS, for every public house bill (H.R.) that was introduced into the 93rd - 112th Congresses (1973-2012).  For every bill, we identify the sponsor and every step in the legislative process as identified in the “All Congressional Actions with Amendments” section of the bill’s “summary and status” hyperlink.  After collecting this information, we code the dates and incidence of each major stage of each bill’s progression through the legislative life cycle, which serves as the foundation for our metrics.
+        </p>
+        <h3>Defining Relevant Outcomes</h3>
 
-<h3>Analyzing Effectiveness</h3>
+        <h3>Analyzing Effectiveness</h3>
 
-<h3>Benchmark Scores</h3>
-<p>
-    A Representative’s Benchmark Score is established by the following two step procedure:
-</p>
-<p>
-    First, we estimate an Ordinary Least Squares regression model with robust standard errors (clustered by Representative) where the dependent variable is Representative i’s LES in Congress t, and the independent variables are Representative i’s Seniority in Congress t, a dummy variable that indicates whether she was a member of the majority party in Congress t, and dummy variables that indicate whether she was a committee and/or subcommittee chair in Congress t.  After estimating the regression coefficients that correspond to the each of the independent variables, we generated predicted values for each Representative’s LES in a given congress by generating linear predictions from our estimated regression coefficients and the data.  That is, we estimated a legislator’s predicted LES in congress t (denoted  (〖LES〗_it ) ̂) in the following manner:
-</p>
-<img src="images/eq2.png"></img>
-<p>
-    The predicted values that emerge from this second-state analysis are denoted as Representative’s “Benchmark Scores” that we refer to on the pages of this website.  
-</p>
-<p>
-    Having identified a Representative’s Benchmark Score, we denote any Representative’s Legislative Effectiveness Score that is at least one standard deviation greater than her benchmark score as being “Above Expectations,” while any Representative’s Legislative Effectiveness Score that is at least one standard deviation less than her benchmark score is denoted as being “Below Expectations.”  Finally, any Representative’s Legislative Effectiveness Score that is no greater than one standard deviation above, or no less than one standard deviation below, her Benchmark Score is denoted as “Meets Expectations.”
-</p>
-<h3>Legislative Effectiveness Scores</h3>
-<p>
-    To calculate the Legislative Effectiveness Score, we draw on several indicators that collectively capture the proven ability of a Representative to advance her agenda items through the legislative process and into law.  More specifically, we identify the number of bills that each member of the House of Representatives sponsored (BILL); and the number of those bills that received any action in committee (AIC), or action beyond committee (ABC) on the floor of the House.  For those bills that received any action beyond committee, we also identify how many of those bills subsequently passed the House (PASS), and how many subsequently became law (LAW).
-</p> 
-<p>
-    Drawing on these data, we categorize all bills as being either commemorative (C), substantive (S), or substantive and significant (SS).  Our categorization is based on the following coding protocol.  A bill is deemed substantive and significant if it had been the subject of an end-of-the-year write-up in the Congressional Quarterly Almanac.  A bill was deemed commemorative if it satisfied any one of several criteria, such as providing for a renaming, commemoration, private relief of an individual, and the like.  Finally, all other bills, and any erstwhile “commemorative” bills that were also the subject of a CQ Almanac write-up were classified as substantive.  For each of these three categories of bills we relied on our five important stages of the legislative process to produce our final set of fifteen indicator variables.
-</p>
-<p>
-    Having compiled fifteen indicators of effectiveness, we calculated a Legislative Effectiveness Score (LES), for each member i in each Congress t, as follows:
-</p>
-<img src="images/eq1.png"></img>
-<p>
-    where the five large terms represent the member’s fraction of bills (1) introduced, (2) receiving action in committee, (3) receiving action beyond committee, (4) passing the House, and (5) becoming law, relative to all N legislators.  Within each of these five terms, commemorative bills are weighted by α = 1, substantive bills by β = 5, and substantive and significant by γ = 10.  The overall weighting of N/5 normalizes the average LES to take a value of 1 in each Congress.
-</p>
-<hr>
+        <h3>Benchmark Scores</h3>
+        <p>
+            A Representative’s Benchmark Score is established by the following two step procedure:
+        </p>
+        <p>
+            First, we estimate an Ordinary Least Squares regression model with robust standard errors (clustered by Representative) where the dependent variable is Representative i’s LES in Congress t, and the independent variables are Representative i’s Seniority in Congress t, a dummy variable that indicates whether she was a member of the majority party in Congress t, and dummy variables that indicate whether she was a committee and/or subcommittee chair in Congress t.  After estimating the regression coefficients that correspond to the each of the independent variables, we generated predicted values for each Representative’s LES in a given congress by generating linear predictions from our estimated regression coefficients and the data.  That is, we estimated a legislator’s predicted LES in congress t (denoted  (〖LES〗_it ) ̂) in the following manner:
+        </p>
+        <img src="images/eq2.png"></img>
+        <p>
+            The predicted values that emerge from this second-state analysis are denoted as Representative’s “Benchmark Scores” that we refer to on the pages of this website.  
+        </p>
+        <p>
+            Having identified a Representative’s Benchmark Score, we denote any Representative’s Legislative Effectiveness Score that is at least one standard deviation greater than her benchmark score as being “Above Expectations,” while any Representative’s Legislative Effectiveness Score that is at least one standard deviation less than her benchmark score is denoted as being “Below Expectations.”  Finally, any Representative’s Legislative Effectiveness Score that is no greater than one standard deviation above, or no less than one standard deviation below, her Benchmark Score is denoted as “Meets Expectations.”
+        </p>
+        <h3>Legislative Effectiveness Scores</h3>
+        <p>
+            To calculate the Legislative Effectiveness Score, we draw on several indicators that collectively capture the proven ability of a Representative to advance her agenda items through the legislative process and into law.  More specifically, we identify the number of bills that each member of the House of Representatives sponsored (BILL); and the number of those bills that received any action in committee (AIC), or action beyond committee (ABC) on the floor of the House.  For those bills that received any action beyond committee, we also identify how many of those bills subsequently passed the House (PASS), and how many subsequently became law (LAW).
+        </p> 
+        <p>
+            Drawing on these data, we categorize all bills as being either commemorative (C), substantive (S), or substantive and significant (SS).  Our categorization is based on the following coding protocol.  A bill is deemed substantive and significant if it had been the subject of an end-of-the-year write-up in the Congressional Quarterly Almanac.  A bill was deemed commemorative if it satisfied any one of several criteria, such as providing for a renaming, commemoration, private relief of an individual, and the like.  Finally, all other bills, and any erstwhile “commemorative” bills that were also the subject of a CQ Almanac write-up were classified as substantive.  For each of these three categories of bills we relied on our five important stages of the legislative process to produce our final set of fifteen indicator variables.
+        </p>
+        <p>
+            Having compiled fifteen indicators of effectiveness, we calculated a Legislative Effectiveness Score (LES), for each member i in each Congress t, as follows:
+        </p>
+        <img src="images/eq1.png"></img>
+        <p>
+            where the five large terms represent the member’s fraction of bills (1) introduced, (2) receiving action in committee, (3) receiving action beyond committee, (4) passing the House, and (5) becoming law, relative to all N legislators.  Within each of these five terms, commemorative bills are weighted by α = 1, substantive bills by β = 5, and substantive and significant by γ = 10.  The overall weighting of N/5 normalizes the average LES to take a value of 1 in each Congress.
+        </p>
+        <hr>
 
-<h2>FAQ</h2>
+        <h2>FAQ</h2>
+    </div>
+</div>

@@ -65,7 +65,7 @@ path {
 /* CONTROLS */
 
 .container-controls {
-  background-color: #E4E5F6;
+  background-color: #f8f8f8; 
   padding-bottom: 16px;
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
   position: absolute !important;
@@ -113,22 +113,8 @@ path {
   background-color: #fff;
 }
 
-.container-rep-list > .container {
-}
-
-.table-reps {
-}
-
-.table-reps tr {
-}
-
-.table-reps thead,
-.table-reps tbody {
-  width: 100%;
-  display: inline-table;
-}
-
-.table-reps thead a {
+.repListHeader a {
+  font-weight: bold;
   cursor: pointer;
   -webkit-touch-callout: none;
   -webkit-user-select: none;

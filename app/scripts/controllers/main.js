@@ -20,10 +20,8 @@ angular.module('lepMapApp')
       $scope.latestCongress = null;
       $scope.repList = null;
       $scope.leData = {};
-      window.leData = $scope.leData;
       $scope.orderByField = 'repName';
       $scope.reverseSort = false;
-      $scope.helpCollapsed = false;
       $scope.statusMessage = 'Loading data...';
 
       // wait for D3 to load
@@ -128,7 +126,7 @@ angular.module('lepMapApp')
             var stateReps = $scope.selectedCongress.states[zRow.state];
             for (var j = 0; j < stateReps.length; j++) {
               var rep = stateReps[j];
-              if (rep.cd === parseInt(zRow.district)) {
+              if (rep.cd === parseInt(zRow.district, 10)) {
                 // map list of zips to rep
                 rep.zips = zips;
               }
@@ -194,12 +192,25 @@ angular.module('lepMapApp')
         return 'muted';
       };
 
+      // return tooltip text based on expectation status
+      $scope.expectTooltip = function(str) {
+        str = str.toLowerCase();
+        if (str === 'below expectations') {
+          return 'A Representative’s Legislative Effectiveness Score is denoted as being “Below Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is lower than .50.';
+        } else if (str === 'meets expectations') {
+          return 'A Representative’s Legislative Effectiveness Score is denoted as “Meets Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is between .50 and 1.50.';
+        } else if (str === 'exceeds expectations') {
+          return 'A Representative’s Legislative Effectiveness Score is denoted as being “bove Expectations” if the ration of her Legislative Effectiveness Score to her Benchmark Score is greater than 1.50.';
+        }
+        return '???';
+      };
+
       // display model for selected representative
       $scope.showRep = function(rep) {
         $modal.open({
           templateUrl: 'views/modalContent.html',
           controller: 'RepModalCtrl',
-          size: 'sm',
+          size: 'lg',
           resolve: {
             rep: function() {
               return rep;
@@ -294,6 +305,11 @@ angular.module('lepMapApp')
 
 angular.module('lepMapApp')
 .controller('ResearchCtrl', function($scope) {
+  $scope.data = '';
+});
+
+angular.module('lepMapApp')
+.controller('DownloadsCtrl', function($scope) {
   $scope.data = '';
 });
 
