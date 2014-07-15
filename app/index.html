@@ -33,14 +33,17 @@
           <li ng-class="{ active: isActive('/book') }"><a ng-href="#/book">The Book</a></li>
           <li ng-class="{ active: isActive('/method') }"><a ng-href="#/method">Methodology</a></li>
           <li ng-class="{ active: isActive('/research') }"><a ng-href="#/research">Research</a></li>
+          <li ng-class="{ active: isActive('/downloads') }"><a ng-href="#/downloads">Downloads</a></li>
           <li ng-class="{ active: isActive('/media') }"><a ng-href="#/media">Media</a></li>
         </ul>
       </div>
     </div>
     <div ng-view=""></div>
     <div class="container-fluid footer-container">
-      <div class="footer">
-        <p>© 2014 Craig Volden & Alan E. Wiseman</p>
+      <div class="container">
+        <div class="footer">
+          <p>© 2014 Craig Volden & Alan E. Wiseman</p>
+        </div>
       </div>
     </div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

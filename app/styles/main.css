@@ -93,16 +93,16 @@ path {
 
 .well-help {
   margin-bottom: 0;
-  height: 340px;
+  height: 464px;
 }
 
 .well-help .nav {
   float: left;
-  width: 260px;
+  width: 270px;
 }
 
 .well-help .tab-content {
-  padding-left: 300px;
+  padding-left: 290px;
 }
 
 /* LIST */

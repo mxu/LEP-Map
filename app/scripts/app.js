@@ -39,6 +39,10 @@ angular
         templateUrl: 'views/research.html',
         controller: 'ResearchCtrl'
       })
+      .when('/downloads', {
+        templateUrl: 'views/downloads.html',
+        controller: 'DownloadsCtrl'
+      })
       .when('/media', {
         templateUrl: 'views/media.html',
         controller: 'MediaCtrl'
