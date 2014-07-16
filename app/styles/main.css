@@ -1,8 +1,48 @@
+/*#B9464B red*/
+/*#D4CBBA light grey*/
+/*#385561 blue*/
+/*#98938B grey*/
+/*#63504C brown*/
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Lato', sans-serif;
+}
+
+div, p {
+  font-family: 'Open Sans', sans-serif;
+}
+
 /* HEADER */
 
 .navbar {
-  border-bottom: 4px solid #c00;
+  background-color: #D4CBBA;
+  border-bottom: 4px solid #B9464B;
   box-shadow: 0 0 24px rgba(0, 0, 0, 1);
+}
+
+.navbar .navbar-brand {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 26px;  
+  color: #666;
+}
+
+.navbar-default .navbar-nav > .active > a {
+  color: #B9464B;
+  background-color: #98938B;
+}
+
+.navbar-default .navbar-nav > .active > a:hover {
+  /*color: #B9464B;*/
+  background-color: #98938B;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #666;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #B9464B;
 }
 
 body {
@@ -12,19 +52,22 @@ body {
 /* PAGE FOOTER */
 
 .footer-container {
-  background-color: #444;
+  background-color: #666;
 }
 
 .footer {
-  color: #888;
-  padding: 32px 32px 128px 32px;
+  color: #98938B;
+  padding: 32px 0px 128px 0px;
 }
 
 /* MAP */
 
 .container-map {
-  background-color: #224;
+  background-color: #385561;
   width: auto;
+  position: relative;
+  z-index: 15;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
 }
 
 .d3-map {
@@ -45,27 +88,27 @@ path {
 }
 
 .states {
-  fill: #fff;
+  fill: #f8f8f8;
   transition: fill 0.3s;
 }
 
 .states:hover {
-  fill: #f88;
+  fill: #f88080;
 }
 
 .statesActive {
-  fill: #c33;
+  fill: #B9464B;
   transition: fill 0.3s;
 }
 
 .statesActive:hover {
-  fill: #f88;
+  fill: #f88080;
 }
 
 /* CONTROLS */
 
 .container-controls {
-  background-color: #f8f8f8; 
+  background-color: #C5D3DD; 
   padding-bottom: 16px;
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
   position: absolute !important;
@@ -108,12 +151,13 @@ path {
 /* LIST */
 
 .container-rep-list {
-  padding-top: 162px;
+  padding-top: 182px;
   padding-bottom: 32px;
-  background-color: #fff;
+  background-color: #f8f8f8;
 }
 
 .repListHeader a {
+  color: #385561;
   font-weight: bold;
   cursor: pointer;
   -webkit-touch-callout: none;
@@ -122,6 +166,28 @@ path {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.repListRow {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #eee;
+  -webkit-transition: all 0.3s;
+  -webkit-transition-delay: 0.3s;
+}
+
+.repListRow:hover {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.repListRow a {
+  color: #385561;
+  cursor: pointer;
+}
+
+.repList-even {
+  background-color: #E9E4E6;
 }
 
 

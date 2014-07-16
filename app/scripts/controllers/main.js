@@ -210,7 +210,7 @@ angular.module('lepMapApp')
         $modal.open({
           templateUrl: 'views/modalContent.html',
           controller: 'RepModalCtrl',
-          size: 'lg',
+          size: '',
           resolve: {
             rep: function() {
               return rep;
