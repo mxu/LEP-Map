@@ -20,6 +20,10 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
+        templateUrl: 'views/splash.html',
+        controller: 'SplashCtrl'
+      })
+      .when('/find', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })

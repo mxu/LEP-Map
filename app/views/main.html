@@ -7,16 +7,16 @@
     <div class="container">
         <div class="row repListControls">
             <div class="col-md-3">
-                <h5>Selected Congress</h5>
+                <strong>Selected Congress</strong>
                 <select class="form-control input-sm" ng-options="key + ' ' + value.year for (key, value) in leData" ng-model="selectedCongress" ng-change="switchCongress()">
                 </select>
             </div>
             <div class="col-md-3">
-                <h5>Selected State</h5>
+                <strong>Selected State</strong>
                 <input type="text" class="form-control input-sm" placeholder="state" ng-model="selectedState" readonly>
             </div>
             <div class="col-md-3">
-                <h5>Search By Zip</h5>
+                <strong>Search By Zip</strong>
                 <form class="form-inline" role="form">
                     <div class="input-group input-group-sm">
                         <input type="text" class="form-control" ng-model="zip" placeholder="zip">
@@ -25,7 +25,7 @@
                 </form>
             </div>
             <div class="col-md-3">
-                <h5>Search By Name</h5>
+                <strong>Search By Name</strong>
                 <form class="form-inline" role="form">
                     <div class="input-group input-group-sm">
                         <input type="text" class="form-control" ng-model="repName" placeholder="name">
@@ -113,10 +113,10 @@
                 {{rep.partyRank}} / {{rep.totalInParty}}
             </div>
             <div class="col-md-2">
-                {{rep.benchmark}}
+                {{rep.benchmark.toFixed(3)}}
             </div>
             <div class="col-md-2">
-                <span class="text-{{expectText(rep.expect)}}"><span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}" popover="{{expectTooltip(rep.expect)}}" popover-trigger="mouseenter" popover-placement="left"></span> {{rep.les}}</span>
+                <span class="text-{{expectText(rep.expect)}}"><span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}" popover="{{expectTooltip(rep.expect)}}" popover-trigger="mouseenter" popover-placement="left"></span> {{rep.les.toFixed(3)}}</span>
             </div>
         </div>
     </div>

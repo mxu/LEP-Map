@@ -74,3 +74,22 @@ angular.module('lepMapApp.directives')
               }
           };
       }]);
+
+angular.module('lepMapApp.directives')
+  .directive('winResize',
+    function($window) {
+      return function($scope) {
+        $scope.setWindowSize = function() {
+          $scope.windowHeight = $window.innerHeight;
+          $scope.windowWidth = $window.innerWidth;
+        };
+
+        angular.element($window).bind('resize', function() {
+          $scope.setWindowSize();
+          $scope.$apply();
+          console.log('window size is ' + $scope.windowWidth + 'x' + $scope.windowHeight);
+        });
+
+        $scope.setWindowSize();
+      };
+    });

@@ -289,6 +289,11 @@ angular.module('lepMapApp')
   ]);
 
 angular.module('lepMapApp')
+  .controller('SplashCtrl', function($scope) {
+    $scope.data = '';
+  });
+
+angular.module('lepMapApp')
   .controller('AboutCtrl', function($scope) {
     $scope.data = '';
   });
