@@ -12,9 +12,10 @@ angular.module('lepMapApp')
     '$scope',
     '$q',
     '$modal',
+    '$document',
     'stateService',
     'd3Service',
-    function($scope, $q, $modal, stateService, d3Service) {
+    function($scope, $q, $modal, $document, stateService, d3Service) {
       $scope.selectedState = null;
       $scope.selectedCongress = null;
       $scope.latestCongress = null;
@@ -23,6 +24,29 @@ angular.module('lepMapApp')
       $scope.orderByField = 'repName';
       $scope.reverseSort = false;
       $scope.statusMessage = 'Loading data...';
+      $scope.currentStep = 0;
+
+      $scope.setOrder = function(field) {
+        if($scope.checkOrder(field)) {
+          $scope.reverseSort = !$scope.reverseSort;
+        } else {
+          $scope.orderByField = field;
+        }
+      };
+
+      $scope.checkOrder = function(field) {
+        if($scope.orderByField === field) {
+          return true;
+        } else if (typeof field === 'object') {
+          for(var i = 0; i < field.length; i++) {
+            if($scope.orderByField[i] !== field[i]) {
+              return false;
+            }
+          }
+          return true;
+        }
+        return false;
+      };
 
       // wait for D3 to load
       d3Service.d3().then(function(d3) {
@@ -284,6 +308,11 @@ angular.module('lepMapApp')
         stateService.prepForBroadcast(inState, zip);
         // display list of matching reps
         $scope.repList = results;
+      };
+
+      // scroll back to the top when tour is complete
+      $scope.tourComplete = function() {
+        $document.scrollTo(0, 0, 300);
       };
     }
   ]);

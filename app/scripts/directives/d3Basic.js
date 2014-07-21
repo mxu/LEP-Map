@@ -87,7 +87,6 @@ angular.module('lepMapApp.directives')
         angular.element($window).bind('resize', function() {
           $scope.setWindowSize();
           $scope.$apply();
-          console.log('window size is ' + $scope.windowWidth + 'x' + $scope.windowHeight);
         });
 
         $scope.setWindowSize();

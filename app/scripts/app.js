@@ -10,6 +10,7 @@
  */
 angular
   .module('lepMapApp', [
+    'angular-tour',
     'duScroll',
     'ui.bootstrap',
     'mgcrea.ngStrap.helpers.dimensions',
