@@ -23,8 +23,8 @@ body {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  /*background-image: url(https://farm5.staticflickr.com/4134/4880487579_c976c049bb_b.jpg);*/
-  background-image: url(https://farm4.staticflickr.com/3170/3078430084_fd82b69198_b.jpg);
+  background-image: url(https://farm5.staticflickr.com/4134/4880487579_c976c049bb_b.jpg);
+  /*background-image: url(https://farm4.staticflickr.com/3170/3078430084_fd82b69198_b.jpg);*/
   position: relative;
   display: block;
   z-index: 16;
@@ -79,7 +79,7 @@ body {
 }
 
 .container-intro {
-  background-color: #e9e9e9;
+  padding-top: 32px;
   padding-bottom: 32px;
 }
 
@@ -87,6 +87,7 @@ body {
   color: #B9464B;
   text-align: center;
   margin-bottom: 32px;
+  font-weight: bold;
 }
 
 .container-intro p {
@@ -196,7 +197,7 @@ body {
 
 .footer {
   color: #98938B;
-  padding: 32px 0px 128px 0px;
+  padding: 32px 0px 256px 0px;
 }
 
 /* MAP */
@@ -337,4 +338,119 @@ path {
   cursor: pointer;
 }
 
+/* ABOUT PAGE */
 
+.container-about {
+  background-color: #385561;
+  color: #e8e8e8;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.container-authors {
+  background-color: #e9e9e9;
+  color: #333;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.row-author {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.row-author .panel {
+  padding: 8px 24px 8px 24px;
+}
+
+.row-author h4 {
+  color: #B9464B;
+}
+
+/* BOOK PAGE */
+
+.container-book {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  background-color: #385561;
+  color: #e8e8e8;
+}
+
+.container-reviews {
+  background-color: #e9e9e9;
+  color: #333;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+/* METHODOLOGY PAGE */
+
+.container-method {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  background-color: #385561;
+  color: #e8e8e8;
+}
+
+.container-defs {
+  background-color: ;
+  padding-bottom: 256px;
+}
+
+.container-defs h2 {
+  font-weight: bold;
+}
+
+.def-panel {
+  font-size: 16px;
+  padding-bottom: 64px;
+}
+
+.def-panel h3 {
+  color: #B9464B;
+  margin-bottom: 32px;
+}
+
+.def-panel p {
+  margin-left: 32px;
+}
+
+.defs-sidebar {
+  width: 220px;
+}
+
+.defs-sidebar .nav > li > a {
+  padding-left: 20px;
+}
+
+.defs-sidebar .nav > li > a:hover {
+  background-color: transparent;
+  border-left: 1px solid #B9464B; 
+  padding-left: 19px;
+}
+
+.defs-sidebar .nav .active {
+  background-color: transparent;
+  color: #B9464B;
+  border-left: 2px solid #B9464B;
+  padding-left: 18px;
+  font-weight: bold;
+}
+
+.defs-sidebar .nav .active:hover {
+  background-color: transparent;
+  color: #B9464B;
+  border-left: 2px solid #B9464B;
+  padding-left: 18px;
+  font-weight: bold;
+}
+
+/* RESEARCH PAGE */
+
+.container-research {
+  padding-bottom: 64px;
+}
+
+.container-research h4 {
+  color: #B9464B;
+}
