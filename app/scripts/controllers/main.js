@@ -170,11 +170,11 @@ angular.module('lepMapApp')
           $scope.repName = null;
         }
         $scope.selectCongress();
+        $document.scrollToElement(angular.element('#repList'), 50, 300);
       });
 
       // performa a new lookup when a new congress is selected
       $scope.switchCongress = function() {
-        console.log($scope.selectedCongress);
         $scope.zip = null;
         if ($scope.repName !== null) {
           $scope.lookupName($scope.repName);
@@ -315,7 +315,6 @@ angular.module('lepMapApp')
       $scope.tourComplete = function() {
         $document.scrollTo(0, 0, 300);
       };
-
       
     }
   ]);
