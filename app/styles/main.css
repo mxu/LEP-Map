@@ -421,12 +421,15 @@ path {
 
 .defs-sidebar .nav > li > a {
   padding-left: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 .defs-sidebar .nav > li > a:hover {
   background-color: transparent;
   border-left: 1px solid #B9464B; 
   padding-left: 19px;
+  color: #B9464B;
 }
 
 .defs-sidebar .nav .active {
