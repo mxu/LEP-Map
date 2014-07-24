@@ -225,7 +225,7 @@ angular.module('lepMapApp')
         } else if (str === 'meets expectations') {
           return 'A Representative’s Legislative Effectiveness Score is denoted as “Meets Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is between .50 and 1.50.';
         } else if (str === 'exceeds expectations') {
-          return 'A Representative’s Legislative Effectiveness Score is denoted as being “bove Expectations” if the ration of her Legislative Effectiveness Score to her Benchmark Score is greater than 1.50.';
+          return 'A Representative’s Legislative Effectiveness Score is denoted as being “Above Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is greater than 1.50.';
         }
         return '???';
       };
