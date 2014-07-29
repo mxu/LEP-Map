@@ -197,7 +197,7 @@ body {
 
 .footer {
   color: #98938B;
-  padding: 32px 0px 256px 0px;
+  padding: 32px 0px 180px 0px;
 }
 
 /* MAP */
@@ -394,8 +394,8 @@ path {
 }
 
 .container-defs {
-  background-color: ;
-  padding-bottom: 256px;
+  background-color: #e9e9e9;
+  padding-bottom: 350px;
 }
 
 .container-defs h2 {
@@ -403,7 +403,7 @@ path {
 }
 
 .def-panel {
-  font-size: 16px;
+  font-size: 14px;
   padding-bottom: 64px;
 }
 
@@ -452,9 +452,98 @@ path {
 /* RESEARCH PAGE */
 
 .container-research {
+  padding-top: 24px;
   padding-bottom: 64px;
+  background-color: #E9E9E9;
 }
 
 .container-research h4 {
   color: #B9464B;
+}
+
+/* MEDIA PAGE */
+
+.row-media {
+  margin-bottom: 30px;
+}
+
+.media-thumb {
+  font-weight: bold;
+  font-size: 72px;
+  color: #fff;
+  line-height: 360px;
+  text-align: center;
+  vertical-align: middle;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 360px;
+  position: relative;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  z-index: 15;
+  display: block;
+}
+
+.media-thumb > .overlay {
+  /*-webkit-transition: all 0.3s;*/
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0);
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 26px;
+  text-align: left;
+  vertical-align: top;
+  padding: 16px;
+  color: rgba(255, 255, 255, 0);
+  text-shadow: none;
+}
+
+.media-thumb:hover > .overlay {
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(185, 70, 75, 1);
+}
+
+.media-thumb:after {
+  content: "";
+  background-image: url('../images/carbon.png');
+  background-repeat: repeat;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  opacity: 0.5;
+  z-index: -1;
+  position: absolute;
+}
+
+.media-thumb-cnn {
+  background-image: url('../images/cnn.png');
+}
+
+.media-thumb-lse {
+  background-image: url('../images/lse.png');
+}
+
+.media-thumb-nbc {
+  background-image: url('../images/nbc.png');
+}
+
+.media-thumb-npr {
+  background-image: url('../images/npr.png');
+}
+
+.media-thumb-ssn {
+  background-image: url('../images/ssn.png');
+}
+
+.media-thumb-wapost {
+  background-image: url('../images/wapost.png');
+}
+
+.media-thumb-nytimes {
+  background-image: url('../images/nytimes.png');
 }

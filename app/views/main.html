@@ -136,16 +136,16 @@
                 </div>
                 <div class="col-md-2">
                     <span class="glyphicon glyphicon-question-sign"
-                          bs-tooltip="tooltips.partyRank"
+                          bs-tooltip="tooltips.les"
                           data-placement="bottom"></span>
-                    <a ng-click="setOrder(['party', 'partyRank'])">
-                        Party Rank
+                    <a ng-click="setOrder('les')">
+                        LES
                     </a>
-                    <span ng-show="checkOrder(['party', 'partyRank'])">
+                    <span ng-show="checkOrder('les')">
                         <span ng-show="!reverseSort"
-                              class="glyphicon glyphicon-sort-by-order"></span>
+                              class="glyphicon glyphicon-sort-by-attributes"></span>
                         <span ng-show="reverseSort"
-                              class="glyphicon glyphicon-sort-by-order-alt"></span>
+                              class="glyphicon glyphicon-sort-by-attributes-alt"></span>
                     </span>
                 </div>
                 <div class="col-md-2">
@@ -164,16 +164,16 @@
                 </div>
                 <div class="col-md-2">
                     <span class="glyphicon glyphicon-question-sign"
-                          bs-tooltip="tooltips.les"
+                          bs-tooltip="tooltips.partyRank"
                           data-placement="bottom"></span>
-                    <a ng-click="setOrder('les')">
-                        LES
+                    <a ng-click="setOrder(['party', 'partyRank'])">
+                        Party Rank
                     </a>
-                    <span ng-show="checkOrder('les')">
+                    <span ng-show="checkOrder(['party', 'partyRank'])">
                         <span ng-show="!reverseSort"
-                              class="glyphicon glyphicon-sort-by-attributes"></span>
+                              class="glyphicon glyphicon-sort-by-order"></span>
                         <span ng-show="reverseSort"
-                              class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                              class="glyphicon glyphicon-sort-by-order-alt"></span>
                     </span>
                 </div>
             </div>
@@ -199,18 +199,18 @@
                     {{rep.stName}}-{{rep.cd}}
                 </div>
                 <div class="col-md-2">
-                    {{rep.partyRank}} / {{rep.totalInParty}}
-                </div>
-                <div class="col-md-2">
-                    {{rep.benchmark.toFixed(3)}}
-                </div>
-                <div class="col-md-2">
                     <span class="text-{{expectText(rep.expect)}}">
                         <span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}"
                               bs-tooltop="??????? test"
                               data-placement="top"></span>
                           <strong>&nbsp;{{rep.les.toFixed(3)}}</strong>
                     </span>
+                </div>
+                <div class="col-md-2">
+                    {{rep.benchmark.toFixed(3)}}
+                </div>
+                <div class="col-md-2">
+                    {{rep.partyRank}} / {{rep.totalInParty}}
                 </div>
             </div>
         </div>

@@ -43,21 +43,21 @@ angular.module('lepMapApp')
       };
 
       $scope.tooltips = {
-        'representative': 'A Legislative Effectiveness Scorecard identifies for a given member of the House of Representatives in a given Congress her Legislative Effectiveness Score, and within that congress: how many bills that she introduced (BILL), how many of those bills received some sort of Action in Committee (AIC) and/or Action beyond Committee (ABC), how many of those bills passed the House (PASS) and how many of those bills ultimately became Law (LAW).  Moreover, the Legislative Effectiveness Scorecard also identifies, for each bill in each stage of the legislative process, how many bills were Commemorative (C), Substantive (S), or Substantive and Significant (SS).',
+        'representative': 'The LES Scorecard details the 15 indicators used to construct the member\'s Legislative Effectiveness Score, based on sponsored bill types and their progression through the legislative process. (See FAQ for more details)',
         'partyRank': 'The Rank in Party is the numerical ranking of a member of the House of Representative’s Legislative Effectiveness Score in comparison to other members of her political party in a given two-year Congress, where “1” connotes the highest Legislative Effectiveness Score.',
         'benchmark': 'The Benchmark Score for a member of the House of Representatives is the expected Legislative Effectiveness Score for a Representative in a given Congress who is of the same political party, has served the same number of terms in Congress, and has held the same number of Committee and/or Subcommittee Chairmanships as the given member.',
-        'les': 'The Legislative Effectiveness Score (LES) is a summary measure that captures how successful each member of the House of Representatives is, in a given two-year Congress, at moving her agenda items, which are coded for their relative substantive significance, through the different steps of the legislative process, which begins with introducing a bill into the House until it (possibly) becomes law.',
+        'les': 'The Legislative Effectiveness Score (LES) is a summary measure that captures how successful each member of the House of Representatives is, in a given two-year Congress, at moving her agenda items, which are coded for their relative substantive significance, through the different steps of the legislative process, which begins with introducing a bill into the House until it (possibly) becomes law. The average LES is 1.0',
         'below': 'A Representative’s Legislative Effectiveness Score is denoted as being “Below Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is lower than .50.',
         'meets': 'A Representative’s Legislative Effectiveness Score is denoted as “Meets Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is between .50 and 1.50.',
         'exceeds': 'A Representative’s Legislative Effectiveness Score is denoted as being “Above Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is greater than 1.50.',
-        'c': 'A bill is denoted as “Commemorative (C)” if it the substance of the legislation satisfies one of several criteria deeming it as commemorative or symbolic in purpose, such as the naming and/or renaming of public buildings, the striking of commemorative coins and medals, and related matters.',
-        's': 'A bill is denoted as “Substantive (S)” if it is neither Commemorative or Substantive and Significant, according to our coding protocol; or, if it would have been denoted as Commemorative, but it was mentioned in an end-of-the-year write-up in the Congressional Quarterly (CQ) Almanac that corresponds to the relevant Congress.',
-        'ss': 'A bill is denoted as “Substantive and Significant (SS)” if the bill is mentioned in an end-of-the-year write-up in the Congressional Quarterly (CQ) Almanac that corresponds to the relevant Congress.',
-        'bill': 'Bill tooltip text blah blah blah blah blah',
-        'aic': 'Action in Committee text blah blah blah blah blah',
-        'abc': 'Action Beyond Committee text blah blah blah blah blah',
-        'pass': 'Bills Passed text blah blah blah blah blah',
-        'law': 'Bills that become Law text blah blah blah blah blah'
+        'c': 'Commemorative bills',
+        's': 'Substantive bills',
+        'ss': 'Substantive and Significant bills',
+        'bill': 'Number of bills (H.R.s) this member sponsored',
+        'aic': 'Number of bills receiving "Action in Committee"',
+        'abc': 'Number of bills receiving "Action beyond Committeee"',
+        'pass': 'Number of bills passing the House',
+        'law': 'Number of bills becoming law'
       };
 
       $scope.setOrder = function(field) {
@@ -128,7 +128,6 @@ angular.module('lepMapApp')
                 'year': ' (' + row.year + ')'
               };
             }
-            console.log($scope.congressData[row.congress]);
             // create an object for each state within the congress
             if (!$scope.congressData[row.congress].states.hasOwnProperty(row.st_name)) {
               $scope.congressData[row.congress].states[row.st_name] = [];
