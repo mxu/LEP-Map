@@ -10,14 +10,16 @@
  */
 angular
   .module('lepMapApp', [
-    'angular-tour',
+    'ngAnimate',
+    'ngRoute',
     'duScroll',
-    'ui.bootstrap',
     'mgcrea.ngStrap.helpers.dimensions',
     'mgcrea.ngStrap.affix',
+    'mgcrea.ngStrap.tooltip',
+    'mgcrea.ngStrap.modal',
+    'angular-tour',
     'lepMapApp.directives',
-    'lepMapApp.services',
-    'ngRoute'
+    'lepMapApp.services'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -40,6 +42,10 @@ angular
       .when('/method', {
         templateUrl: 'views/method.html',
         controller: 'MethodCtrl'
+      })
+      .when('/faq', {
+        templateUrl: 'views/faq.html',
+        controller: 'FAQCtrl'
       })
       .when('/research', {
         templateUrl: 'views/research.html',

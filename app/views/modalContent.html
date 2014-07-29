@@ -1,63 +1,85 @@
-<div class="modal-header text-center">
-  <h2>{{rep.repName}}</h2>
-  <strong>({{rep.party.substring(0,1)}}, {{rep.stName}}-{{rep.cd}})</strong>
-  <br>
-  <strong>{{rep.congress}} Congress</strong>
-</div>
-<div class="modal-body">
-    <span class="text-center">
-        <h4>
-            LES: <span class="text-{{expectText}}"><span class="glyphicon glyphicon-{{expectGlyph}}"></span> {{rep.les}}</span>
-        </h4>
-    </span>
-    <table class="table table-condensed table-bordered">
-        <thead>
-            <tr>
-                <th class="col-md-3"></th>
-                <th class="col-md-3">
-                    <span class="glyphicon glyphicon-question-sign" popover="A bill is denoted as “Commemorative (C)” if it the substance of the legislation satisfies one of several criteria deeming it as commemorative or symbolic in purpose, such as the naming and/or renaming of public buildings, the striking of commemorative coins and medals, and related matters." popover-trigger="mouseenter" popover-placement="top" popover-animation="true"></span> C
-                </th>
-                <th class="col-md-3">
-                    <span class="glyphicon glyphicon-question-sign" popover="A bill is denoted as “Substantive (S)” if it is neither Commemorative or Substantive and Significant, according to our coding protocol; or, if it would have been denoted as Commemorative, but it was mentioned in an end-of-the-year write-up in the Congressional Quarterly (CQ) Almanac that corresponds to the relevant Congress." popover-trigger="mouseenter" popover-placement="top" popover-animation="true"></span> S
-                </th>
-                <th class="col-md-3">
-                    <span class="glyphicon glyphicon-question-sign" popover="A bill is denoted as “Substantive and Significant (SS)” if the bill is mentioned in an end-of-the-year write-up in the Congressional Quarterly (CQ) Almanac that corresponds to the relevant Congress." popover-trigger="mouseenter" popover-placement="top" popover-animation="true"></span> SS
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="col-md-3">BILL</td>
-                <td class="col-md-3">{{rep.cBills}}</td>
-                <td class="col-md-3">{{rep.sBills}}</td>
-                <td class="col-md-3">{{rep.ssBills}}</td>
-            </tr>
-            <tr>
-                <td class="col-md-3">AIC</td>
-                <td class="col-md-3">{{rep.cAic}}</td>
-                <td class="col-md-3">{{rep.sAic}}</td>
-                <td class="col-md-3">{{rep.ssAic}}</td>
-            </tr>
-            <tr>
-                <td class="col-md-3">ABC</td>
-                <td class="col-md-3">{{rep.cAbc}}</td>
-                <td class="col-md-3">{{rep.sAbc}}</td>
-                <td class="col-md-3">{{rep.ssAbc}}</td>
-            </tr>
-            <tr>
-                <td class="col-md-3">PASS</td>
-                <td class="col-md-3">{{rep.cPass}}</td>
-                <td class="col-md-3">{{rep.sPass}}</td>
-                <td class="col-md-3">{{rep.ssPass}}</td>
-            </tr>
-            <tr>
-                <td class="col-md-3">LAW</td>
-                <td class="col-md-3">{{rep.cLaw}}</td>
-                <td class="col-md-3">{{rep.sLaw}}</td>
-                <td class="col-md-3">{{rep.ssLaw}}</td>
-            </tr>
-    </table>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-danger" ng-click="close()">Close</button>
-</div>
+<div class="modal modal-rep"
+     tabindex="-1"
+     role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+              <h2>{{select.rep.repName}}</h2>
+              <strong>({{select.rep.party.substring(0,1)}}, {{select.rep.stName}}-{{select.rep.cd}})</strong>
+              <br>
+              <strong>{{select.rep.congress}} Congress</strong>
+            </div>
+            <div class="modal-body">
+                <span class="text-center">
+                    <h4>
+                        LES: <span class="text-{{expectText(select.rep.expect)}}"><span class="glyphicon glyphicon-{{expectGlyph(select.rep.expect)}}"></span> {{select.rep.les}}</span>
+                    </h4>
+                </span>
+                        <div class="row row-card">
+                            <div class="col-md-3 col-md-offset-3 card-header">
+                                <span class="glyphicon glyphicon-question-sign"
+                                      bs-tooltip="tooltips.c"
+                                      data-placement="bottom"></span>&nbsp;C
+                            </div>
+                            <div class="col-md-3 card-header">
+                                <span class="glyphicon glyphicon-question-sign"
+                                      bs-tooltip="tooltips.s"
+                                      data-placement="bottom"></span>&nbsp;S
+                            </div>
+                            <div class="col-md-3 card-header">
+                                <span class="glyphicon glyphicon-question-sign"
+                                      bs-tooltip="tooltips.ss"
+                                      data-placement="bottom"></span>&nbsp;SS
+                            </div>
+                        </div>
+                        <div class="row row-card">
+                            <div class="col-md-3 card-header">
+                                <span class="glyphicon glyphicon-question-sign"
+                                      bs-tooltip="tooltips.bill"
+                                      data-placement="top"></span>&nbsp;BILL</div>
+                            <div class="col-md-3">{{select.rep.cBills}}</div>
+                            <div class="col-md-3">{{select.rep.sBills}}</div>
+                            <div class="col-md-3">{{select.rep.ssBills}}</div>
+                        </div>
+                        <div class="row row-card">
+                            <div class="col-md-3 card-header">
+                                <span class="glyphicon glyphicon-question-sign"
+                                      bs-tooltip="tooltips.aic"
+                                      data-placement="top"></span>&nbsp;AIC</div>
+                            <div class="col-md-3">{{select.rep.cAic}}</div>
+                            <div class="col-md-3">{{select.rep.sAic}}</div>
+                            <div class="col-md-3">{{select.rep.ssAic}}</div>
+                        </div>
+                        <div class="row row-card">
+                            <div class="col-md-3 card-header">
+                                <span class="glyphicon glyphicon-question-sign"
+                                      bs-tooltip="tooltips.abc"
+                                      data-placement="top"></span>&nbsp;ABC</div>
+                            <div class="col-md-3">{{select.rep.cAbc}}</div>
+                            <div class="col-md-3">{{select.rep.sAbc}}</div>
+                            <div class="col-md-3">{{select.rep.ssAbc}}</div>
+                        </div>
+                        <div class="row row-card">
+                            <div class="col-md-3 card-header">
+                                <span class="glyphicon glyphicon-question-sign"
+                                      bs-tooltip="tooltips.pass"
+                                      data-placement="top"></span>&nbsp;PASS</div>
+                            <div class="col-md-3">{{select.rep.cPass}}</div>
+                            <div class="col-md-3">{{select.rep.sPass}}</div>
+                            <div class="col-md-3">{{select.rep.ssPass}}</div>
+                        </div>
+                        <div class="row row-card">
+                            <div class="col-md-3 card-header">
+                                <span class="glyphicon glyphicon-question-sign"
+                                      bs-tooltip="tooltips.law"
+                                      data-placement="top"></span>&nbsp;LAW</div>
+                            <div class="col-md-3">{{select.rep.cLaw}}</div>
+                            <div class="col-md-3">{{select.rep.sLaw}}</div>
+                            <div class="col-md-3">{{select.rep.ssLaw}}</div>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" 
+                        ng-click="hideRep()">Close</button>
+            </div>
+</div></div></div>

@@ -9,6 +9,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -35,6 +36,7 @@
           <li ng-class="{ active: isActive('/about') }"><a ng-href="#/about">About</a></li>
           <li ng-class="{ active: isActive('/book') }"><a ng-href="#/book">The Book</a></li>
           <li ng-class="{ active: isActive('/method') }"><a ng-href="#/method">Methodology</a></li>
+          <li ng-class="{ active: isActive('/faq') }"><a ng-href="#/faq">FAQ</a></li>
           <li ng-class="{ active: isActive('/research') }"><a ng-href="#/research">Research</a></li>
           <li ng-class="{ active: isActive('/downloads') }"><a ng-href="#/downloads">Downloads</a></li>
           <li ng-class="{ active: isActive('/media') }"><a ng-href="#/media">Media</a></li>
@@ -73,10 +75,12 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
     <script src="bower_components/angular-scroll/angular-scroll.min.js"></script>
     <script src="bower_components/angular-tour/dist/angular-tour-tpls.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

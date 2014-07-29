@@ -16,30 +16,64 @@ angular.module('lepMapApp')
     'stateService',
     'd3Service',
     function($scope, $q, $modal, $document, stateService, d3Service) {
-      $scope.selectedState = null;
-      $scope.selectedCongress = null;
-      $scope.latestCongress = null;
-      $scope.repList = null;
-      $scope.leData = {};
-      $scope.orderByField = 'repName';
-      $scope.reverseSort = false;
-      $scope.statusMessage = 'Loading data...';
-      $scope.currentStep = 0;
+      $scope.select = {
+        'congress': null,
+        'latest': null,
+        'state': null,
+        'zip': null,
+        'name': null,
+        'reps': null,
+        'rep': null
+      };
+
+      $scope.sort = {
+        'field': 'repName',
+        'reverse': false
+      };
+
+      $scope.congressData = {};
+
+      $scope.tourtips = {
+        'currentStep': -1,
+        'congress': 'Step 1: Select a session of Congress to explore',
+        'state': 'Step 2: Search the selected congress by clicking a state on the map...',
+        'zip': '... or search the latest congress by zip...',
+        'name': '... or search the selected congress by representative name',
+        'list': 'Step 3: Browse and compare the list of representatives.  Click a row to view their LES scorecard.  Hover over (?) icons to view an explanation of each term.'
+      };
+
+      $scope.tooltips = {
+        'representative': 'A Legislative Effectiveness Scorecard identifies for a given member of the House of Representatives in a given Congress her Legislative Effectiveness Score, and within that congress: how many bills that she introduced (BILL), how many of those bills received some sort of Action in Committee (AIC) and/or Action beyond Committee (ABC), how many of those bills passed the House (PASS) and how many of those bills ultimately became Law (LAW).  Moreover, the Legislative Effectiveness Scorecard also identifies, for each bill in each stage of the legislative process, how many bills were Commemorative (C), Substantive (S), or Substantive and Significant (SS).',
+        'partyRank': 'The Rank in Party is the numerical ranking of a member of the House of Representative’s Legislative Effectiveness Score in comparison to other members of her political party in a given two-year Congress, where “1” connotes the highest Legislative Effectiveness Score.',
+        'benchmark': 'The Benchmark Score for a member of the House of Representatives is the expected Legislative Effectiveness Score for a Representative in a given Congress who is of the same political party, has served the same number of terms in Congress, and has held the same number of Committee and/or Subcommittee Chairmanships as the given member.',
+        'les': 'The Legislative Effectiveness Score (LES) is a summary measure that captures how successful each member of the House of Representatives is, in a given two-year Congress, at moving her agenda items, which are coded for their relative substantive significance, through the different steps of the legislative process, which begins with introducing a bill into the House until it (possibly) becomes law.',
+        'below': 'A Representative’s Legislative Effectiveness Score is denoted as being “Below Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is lower than .50.',
+        'meets': 'A Representative’s Legislative Effectiveness Score is denoted as “Meets Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is between .50 and 1.50.',
+        'exceeds': 'A Representative’s Legislative Effectiveness Score is denoted as being “Above Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is greater than 1.50.',
+        'c': 'A bill is denoted as “Commemorative (C)” if it the substance of the legislation satisfies one of several criteria deeming it as commemorative or symbolic in purpose, such as the naming and/or renaming of public buildings, the striking of commemorative coins and medals, and related matters.',
+        's': 'A bill is denoted as “Substantive (S)” if it is neither Commemorative or Substantive and Significant, according to our coding protocol; or, if it would have been denoted as Commemorative, but it was mentioned in an end-of-the-year write-up in the Congressional Quarterly (CQ) Almanac that corresponds to the relevant Congress.',
+        'ss': 'A bill is denoted as “Substantive and Significant (SS)” if the bill is mentioned in an end-of-the-year write-up in the Congressional Quarterly (CQ) Almanac that corresponds to the relevant Congress.',
+        'bill': 'Bill tooltip text blah blah blah blah blah',
+        'aic': 'Action in Committee text blah blah blah blah blah',
+        'abc': 'Action Beyond Committee text blah blah blah blah blah',
+        'pass': 'Bills Passed text blah blah blah blah blah',
+        'law': 'Bills that become Law text blah blah blah blah blah'
+      };
 
       $scope.setOrder = function(field) {
         if($scope.checkOrder(field)) {
-          $scope.reverseSort = !$scope.reverseSort;
+          $scope.sort.reverse = !$scope.sort.reverse;
         } else {
-          $scope.orderByField = field;
+          $scope.sort.field = field;
         }
       };
 
       $scope.checkOrder = function(field) {
-        if($scope.orderByField === field) {
+        if($scope.sort.field === field) {
           return true;
         } else if (typeof field === 'object') {
           for(var i = 0; i < field.length; i++) {
-            if($scope.orderByField[i] !== field[i]) {
+            if($scope.sort.field[i] !== field[i]) {
               return false;
             }
           }
@@ -75,8 +109,6 @@ angular.module('lepMapApp')
           var zipData = data[1];
 
           var latestCongress = 0;
-
-          $scope.statusMessage = 'Data loaded';
           // parse the congress data
           for (var i = 0; i < congressData.length; i++) {
             var row = congressData[i];
@@ -89,15 +121,17 @@ angular.module('lepMapApp')
               latestCongress = congressNum;
             }
             // create an object for each congress
-            if (!$scope.leData.hasOwnProperty(row.congress)) {
-              $scope.leData[row.congress] = {
+            if (!$scope.congressData.hasOwnProperty(row.congress)) {
+              $scope.congressData[row.congress] = {
                 'states': {},
+                'num': congressNum,
                 'year': ' (' + row.year + ')'
               };
             }
+            console.log($scope.congressData[row.congress]);
             // create an object for each state within the congress
-            if (!$scope.leData[row.congress].states.hasOwnProperty(row.st_name)) {
-              $scope.leData[row.congress].states[row.st_name] = [];
+            if (!$scope.congressData[row.congress].states.hasOwnProperty(row.st_name)) {
+              $scope.congressData[row.congress].states[row.st_name] = [];
             }
             // copy all the row data into a new representative object within the state
             /*jshing camelcase: false */
@@ -134,12 +168,12 @@ angular.module('lepMapApp')
               'cAbc': row.c_abc
             };
 
-            $scope.leData[row.congress].states[row.st_name].push(newRep);
+            $scope.congressData[row.congress].states[row.st_name].push(newRep);
           }
 
           // select the most recent congress
-          $scope.latestCongress = latestCongress.toString();
-          $scope.selectedCongress = $scope.leData[$scope.latestCongress];
+          $scope.select.latest = latestCongress.toString();
+          $scope.select.congress = $scope.congressData[$scope.select.latest];
 
           // parse zip data
           for (i = 0; i < zipData.length; i++) {
@@ -147,7 +181,7 @@ angular.module('lepMapApp')
             // parse zips
             var zips = zRow.zip.split('-');
             // find the rep for the given state and district
-            var stateReps = $scope.selectedCongress.states[zRow.state];
+            var stateReps = $scope.select.congress.states[zRow.state];
             for (var j = 0; j < stateReps.length; j++) {
               var rep = stateReps[j];
               if (rep.cd === parseInt(zRow.district, 10)) {
@@ -158,26 +192,25 @@ angular.module('lepMapApp')
           }
 
           // select Washington
-          stateService.prepForBroadcast('CA', null);
+          // stateService.prepForBroadcast('CA', null);
         });
       });
 
       // update scope vars when a state is selected
       $scope.$on('handleBroadcast', function() {
-        $scope.selectedState = stateService.code;
-        $scope.zip = stateService.zip;
+        $scope.select.state = stateService.code;
+        $scope.select.zip = stateService.zip;
         if (stateService.code !== null) {
-          $scope.repName = null;
+          $scope.select.name = null;
         }
         $scope.selectCongress();
-        $document.scrollToElement(angular.element('#repList'), 50, 300);
       });
 
       // performa a new lookup when a new congress is selected
       $scope.switchCongress = function() {
-        $scope.zip = null;
-        if ($scope.repName !== null) {
-          $scope.lookupName($scope.repName);
+        $scope.select.zip = null;
+        if ($scope.select.name !== null && $scope.select.name !== '') {
+          $scope.lookupName($scope.select.anem);
         } else {
           $scope.selectCongress();
         }
@@ -185,10 +218,12 @@ angular.module('lepMapApp')
 
       // update list of representatives
       $scope.selectCongress = function() {
-        if ($scope.selectedState === null) {
-          $scope.repList = null;
+        $scope.select.reps = null;
+        if ($scope.select.state === null) {
+          $scope.select.reps = null;
         }
-        $scope.repList = $scope.selectedCongress.states[$scope.selectedState];
+        $scope.select.reps = $scope.select.congress.states[$scope.select.state];
+        //$document.scrollToElement(angular.element('#repList'), 50, 300);
       };
 
       // return glyph name based on expectation status
@@ -221,41 +256,39 @@ angular.module('lepMapApp')
       $scope.expectTooltip = function(str) {
         str = str.toLowerCase();
         if (str === 'below expectations') {
-          return 'A Representative’s Legislative Effectiveness Score is denoted as being “Below Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is lower than .50.';
+          return $scope.tooltips.below;
         } else if (str === 'meets expectations') {
-          return 'A Representative’s Legislative Effectiveness Score is denoted as “Meets Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is between .50 and 1.50.';
+          return $scope.tooltips.meets;
         } else if (str === 'exceeds expectations') {
-          return 'A Representative’s Legislative Effectiveness Score is denoted as being “Above Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is greater than 1.50.';
+          return $scope.tooltips.exceeds;
         }
         return '???';
       };
 
       // display model for selected representative
+      var repModal = $modal({
+        scope: $scope,
+        template: 'views/modalContent.html',
+        animation: 'am-fade-and-slide-top',
+        show: false
+      });
+
       $scope.showRep = function(rep) {
-        $modal.open({
-          templateUrl: 'views/modalContent.html',
-          controller: 'RepModalCtrl',
-          size: '',
-          resolve: {
-            rep: function() {
-              return rep;
-            },
-            expectText: function() {
-              return $scope.expectText(rep.expect);
-            },
-            expectGlyph: function() {
-              return $scope.expectGlyph(rep.expect);
-            }
-          }
-        });
+        $scope.select.rep = rep;
+        repModal.$promise.then(repModal.show);
+      };
+
+      $scope.hideRep = function() {
+        repModal.$promise.then(repModal.hide);
       };
 
       // look up representative within the current congress by name
       $scope.lookupName = function(repName) {
+        $scope.select.reps = null;
         var repStrs = repName.toLowerCase().split(' ');
         var results = [];
         // loop through each state of the currently selected congress
-        var states = $scope.selectedCongress.states;
+        var states = $scope.select.congress.states;
         for (var state in states) {
           var reps = states[state];
           // loop through each representative within the current state
@@ -274,23 +307,24 @@ angular.module('lepMapApp')
         // deselect state and zip
         stateService.prepForBroadcast(null, null);
         // display list of matching reps
-        $scope.repList = results;
+        $scope.select.reps = results;
       };
 
       // look up representative within the latest congress by zip
       $scope.lookupZip = function(zip) {
+        $scope.select.reps = null;
         var results = [];
         var inState = null;
         // select the latest congress
-        $scope.selectedCongress = $scope.leData[$scope.latestCongress];
+        $scope.select.congress = $scope.congressData[$scope.select.latest];
         // loop through each state
-        var states = $scope.selectedCongress.states;
+        var states = $scope.select.congress.states;
         for (var state in states) {
           // loop through each rep
           var reps = states[state];
           for (var i = 0; i < reps.length; i++) {
             if (!reps[i].hasOwnProperty('zips')) {
-              console.log(state + reps[i].cd + ' has no zips');
+              // console.log(state + reps[i].cd + ' has no zips');
               continue;
             }
             var zips = reps[i].zips;
@@ -308,7 +342,7 @@ angular.module('lepMapApp')
         // select the correct state and zip
         stateService.prepForBroadcast(inState, zip);
         // display list of matching reps
-        $scope.repList = results;
+        $scope.select.reps = results;
       };
 
       // scroll back to the top when tour is complete
@@ -336,6 +370,11 @@ angular.module('lepMapApp')
 
 angular.module('lepMapApp')
 .controller('MethodCtrl', function($scope) {
+  $scope.data = '';
+});
+
+angular.module('lepMapApp')
+.controller('FAQCtrl', function($scope) {
   $scope.data = '';
 });
 
