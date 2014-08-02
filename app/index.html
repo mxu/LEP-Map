@@ -31,18 +31,20 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">The Lawmakers</a>
         </div>
-        <ul class="nav navbar-nav pull-right">
-          <li ng-class="{ active: isActive('/find') }"><a ng-href="#/find">Find Representatives</a></li>
-          <li ng-class="{ active: isActive('/about') }"><a ng-href="#/about">About</a></li>
-          <li ng-class="{ active: isActive('/book') }"><a ng-href="#/book">The Book</a></li>
-          <li ng-class="{ active: isActive('/method') }"><a ng-href="#/method">Methodology</a></li>
-          <li ng-class="{ active: isActive('/faq') }"><a ng-href="#/faq">FAQ</a></li>
-          <li ng-class="{ active: isActive('/research') }"><a ng-href="#/research">Research</a></li>
-          <li ng-class="{ active: isActive('/downloads') }"><a ng-href="#/downloads">Downloads</a></li>
-          <li ng-class="{ active: isActive('/media') }"><a ng-href="#/media">Media</a></li>
-        </ul>
-      </div>
-    </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+            <li ng-class="{ active: isActive('/find') }"><a ng-href="#/find">Find Representatives</a></li>
+            <li ng-class="{ active: isActive('/about') }"><a ng-href="#/about">Background</a></li>
+            <li ng-class="{ active: isActive('/book') }"><a ng-href="#/book">The Book</a></li>
+            <li ng-class="{ active: isActive('/method') }"><a ng-href="#/method">Methodology</a></li>
+            <li ng-class="{ active: isActive('/faq') }"><a ng-href="#/faq">FAQ</a></li>
+            <li ng-class="{ active: isActive('/research') }"><a ng-href="#/research">Research</a></li>
+            <li ng-class="{ active: isActive('/downloads') }"><a ng-href="#/downloads">Data Downloads</a></li>
+            <li ng-class="{ active: isActive('/media') }"><a ng-href="#/media">Media Coverage</a></li>
+          </ul>
+        </div> <!-- .navbar-collapse -->
+      </div> <!-- .container -->
+    </div> <!-- .navbar -->
     <div ng-view=""></div>
     <div class="container-fluid footer-container">
       <div class="container">
@@ -50,9 +52,11 @@
           <span class="pull-left">
             <p>© 2014 Craig Volden &amp; Alan E. Wiseman</p>
           </span>
-          <span class="pull-right">
+          <span class="pull-right" style="text-align: right;">
             <p>
-              Support provided by the Center for Study of Democratic Institutions and the Frank Batten School of Leadership and Public Policy
+              Support provided by the <a href="http://www.vanderbilt.edu/csdi/" target="_blank">Center for the Study of Democratic</a> Institutions at Vanderbilt University
+              <br>
+              and the <a href="http://batten.virginia.edu/" target="_blank">Frank Batten School of Leadership and Public Policy</a> at the University of Virginia
             </p>
           </span>
         </div>

@@ -43,7 +43,7 @@ angular.module('lepMapApp')
       };
 
       $scope.tooltips = {
-        'representative': 'The LES Scorecard details the 15 indicators used to construct the member\'s Legislative Effectiveness Score, based on sponsored bill types and their progression through the legislative process. (See FAQ for more details)',
+        'representative': 'The LES Scorecard details the 15 indicators used to construct the member\'s Legislative Effectiveness Score, based on sponsored bill types and their progression through the legislative process. (See Methodology for more details)',
         'partyRank': 'The Rank in Party is the numerical ranking of a member of the House of Representative’s Legislative Effectiveness Score in comparison to other members of her political party in a given two-year Congress, where “1” connotes the highest Legislative Effectiveness Score.',
         'benchmark': 'The Benchmark Score for a member of the House of Representatives is the expected Legislative Effectiveness Score for a Representative in a given Congress who is of the same political party, has served the same number of terms in Congress, and has held the same number of Committee and/or Subcommittee Chairmanships as the given member.',
         'les': 'The Legislative Effectiveness Score (LES) is a summary measure that captures how successful each member of the House of Representatives is, in a given two-year Congress, at moving her agenda items, which are coded for their relative substantive significance, through the different steps of the legislative process, which begins with introducing a bill into the House until it (possibly) becomes law. The average LES is 1.0',
@@ -57,7 +57,8 @@ angular.module('lepMapApp')
         'aic': 'Number of bills receiving "Action in Committee"',
         'abc': 'Number of bills receiving "Action beyond Committeee"',
         'pass': 'Number of bills passing the House',
-        'law': 'Number of bills becoming law'
+        'law': 'Number of bills becoming law',
+        'zip': 'Search the most recent congress within the dataset by zip'
       };
 
       $scope.setOrder = function(field) {
@@ -222,7 +223,7 @@ angular.module('lepMapApp')
           $scope.select.reps = null;
         }
         $scope.select.reps = $scope.select.congress.states[$scope.select.state];
-        //$document.scrollToElement(angular.element('#repList'), 50, 300);
+        $document.scrollToElement(angular.element('#repList'), 50, 300);
       };
 
       // return glyph name based on expectation status

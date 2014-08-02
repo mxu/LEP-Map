@@ -23,7 +23,7 @@ body {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url(https://farm5.staticflickr.com/4134/4880487579_c976c049bb_b.jpg);
+  background-image: url(https://farm8.staticflickr.com/7349/9733883414_125a361ba1_h.jpg);
   /*background-image: url(https://farm4.staticflickr.com/3170/3078430084_fd82b69198_b.jpg);*/
   position: relative;
   display: block;
@@ -41,7 +41,7 @@ body {
   left: 0;
   right: 0;
   top: 0;
-  opacity: 0.6;
+  opacity: 0.5;
   z-index: -1;
   position: absolute;
 }
@@ -155,7 +155,6 @@ body {
 
 .navbar {
   background-color: #363636;
-  /*background-color: rgba(54, 54, 54, 0.9);*/
   border-bottom: 4px solid #B9464B;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
@@ -404,12 +403,12 @@ path {
 
 .def-panel {
   font-size: 14px;
-  padding-bottom: 64px;
+  padding-bottom: 32px;
 }
 
 .def-panel h3 {
   color: #B9464B;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
 .def-panel p {

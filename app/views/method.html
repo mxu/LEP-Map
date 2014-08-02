@@ -13,6 +13,22 @@
                     To generate the Legislative Effectiveness Score, and related metrics, we rely on computer code written to collect all relevant information from the Library of Congress website, THOMAS, for every public house bill (H.R.) that was introduced into the 93rd - 112th Congresses (1973-2012).  For every bill, we identify the sponsor and every step in the legislative process as identified in the “All Congressional Actions with Amendments” section of the bill’s “summary and status” hyperlink.  After collecting this information, we code the dates and incidence of each major stage of each bill’s progression through the legislative life cycle, which serves as the foundation for our metrics.
                 </p>
             </div>
+            <div class="def-panel" id="lescore">
+            <h3>Legislative Effectiveness Scores</h3>
+                <p>
+                    To calculate the Legislative Effectiveness Score, we draw on several indicators that collectively capture the proven ability of a Representative to advance her agenda items through the legislative process and into law.  More specifically, we identify the number of bills that each member of the House of Representatives sponsored (BILL); and the number of those bills that received any action in committee (AIC), or action beyond committee (ABC) on the floor of the House.  For those bills that received any action beyond committee, we also identify how many of those bills subsequently passed the House (PASS), and how many subsequently became law (LAW).
+                </p> 
+                <p>
+                    Drawing on these data, we categorize all bills as being either commemorative (C), substantive (S), or substantive and significant (SS).  Our categorization is based on the following coding protocol.  A bill is deemed substantive and significant if it had been the subject of an end-of-the-year write-up in the Congressional Quarterly Almanac.  A bill was deemed commemorative if it satisfied any one of several criteria, such as providing for a renaming, commemoration, private relief of an individual, and the like.  Finally, all other bills, and any erstwhile “commemorative” bills that were also the subject of a CQ Almanac write-up were classified as substantive.  For each of these three categories of bills we relied on our five important stages of the legislative process to produce our final set of fifteen indicator variables.
+                </p>
+                <p>
+                    Having compiled fifteen indicators of effectiveness, we calculated a Legislative Effectiveness Score (LES), for each member i in each Congress t, as follows:
+                </p>
+                <img src="images/eq1.png" class="center-block img-responsive" height="50%" width="50%"></img>
+                <p>
+                    where the five large terms represent the member’s fraction of bills (1) introduced, (2) receiving action in committee, (3) receiving action beyond committee, (4) passing the House, and (5) becoming law, relative to all N legislators.  Within each of these five terms, commemorative bills are weighted by α = 1, substantive bills by β = 5, and substantive and significant by γ = 10.  The overall weighting of N/5 normalizes the average LES to take a value of 1 in each Congress.
+                </p>
+            </div>
             <div class="def-panel" id="benchmark">
                 <h3>Benchmark Scores</h3>
                 <p>
@@ -26,36 +42,20 @@
                     The predicted values that emerge from this second-state analysis are denoted as Representative’s “Benchmark Scores” that we refer to on the pages of this website.  
                 </p>
                 <p>
-                    Having identified a Representative’s Benchmark Score, we denote any Representative’s Legislative Effectiveness Score that is at least one standard deviation greater than her benchmark score as being “Above Expectations,” while any Representative’s Legislative Effectiveness Score that is at least one standard deviation less than her benchmark score is denoted as being “Below Expectations.”  Finally, any Representative’s Legislative Effectiveness Score that is no greater than one standard deviation above, or no less than one standard deviation below, her Benchmark Score is denoted as “Meets Expectations.”
-                </p>
-            </div>
-            <div class="def-panel" id="lescore">
-            <h3>Legislative Effectiveness Scores</h3>
-                <p>
-                    To calculate the Legislative Effectiveness Score, we draw on several indicators that collectively capture the proven ability of a Representative to advance her agenda items through the legislative process and into law.  More specifically, we identify the number of bills that each member of the House of Representatives sponsored (BILL); and the number of those bills that received any action in committee (AIC), or action beyond committee (ABC) on the floor of the House.  For those bills that received any action beyond committee, we also identify how many of those bills subsequently passed the House (PASS), and how many subsequently became law (LAW).
-                </p> 
-                <p>
-                    Drawing on these data, we categorize all bills as being either commemorative (C), substantive (S), or substantive and significant (SS).  Our categorization is based on the following coding protocol.  A bill is deemed substantive and significant if it had been the subject of an end-of-the-year write-up in the Congressional Quarterly Almanac.  A bill was deemed commemorative if it satisfied any one of several criteria, such as providing for a renaming, commemoration, private relief of an individual, and the like.  Finally, all other bills, and any erstwhile “commemorative” bills that were also the subject of a CQ Almanac write-up were classified as substantive.  For each of these three categories of bills we relied on our five important stages of the legislative process to produce our final set of fifteen indicator variables.
-                </p>
-                <p>
-                    Having compiled fifteen indicators of effectiveness, we calculated a Legislative Effectiveness Score (LES), for each member i in each Congress t, as follows:
-                    <img src="images/eq1.png" class="img-responsive"></img>
-                </p>
-                <p>
-                    where the five large terms represent the member’s fraction of bills (1) introduced, (2) receiving action in committee, (3) receiving action beyond committee, (4) passing the House, and (5) becoming law, relative to all N legislators.  Within each of these five terms, commemorative bills are weighted by α = 1, substantive bills by β = 5, and substantive and significant by γ = 10.  The overall weighting of N/5 normalizes the average LES to take a value of 1 in each Congress.
+                    Having identified a Representative’s Benchmark Score, we denote a Representative’s Legislative Effectiveness Score as being "Above Expectations" if the ratio of her Legislative Effectiveness Score to her Benchmark Score is greater than 1.50. We denote a Representative's Legislative Effectiveness Score as being "Below Expectations" if the ratio of her Legislative Effectiveness Score to her Benchmark Score is less than .50. Finally, we denote a Representative’s Legislative Effectiveness Score as "Meets Expectations" if the ratio of her Legislative Effectiveness Score to her Benchmark Score is between .50 and 1.50.
                 </p>
             </div>
             <h2>Glossary</h2>
-            <div class="def-panel" id="scorecard">
-                <h3>Scorecard</h3>
+            <div class="def-panel" id="abc">
+                <h3>ABC</h3>
                 <p>
-                    The LES Scorecard details the 15 indicators used to construct the member’s Legislative Effectiveness Score, based on sponsored bill types and their progression through the legislative process.
+                    Number of bills that were sponsored by a particular member of the House of Representatives that received “Action beyond Committee,” meaning that the bill has been successfully reported out of committee and/or been the subject of debate and/or receiving a vote on the floor of the House of Representatives.
                 </p>
             </div>
-            <div class="def-panel" id="bill">
-                <h3>BILL</h3>
+            <div class="def-panel" id="above">
+                <h3>Above Expectations</h3>
                 <p>
-                    Number of bills (H.R.s) that were sponsored by a particular member of the House of Representatives.
+                    A Representative’s Legislative Effectiveness Score is denoted as being “Above Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is greater than 1.50.
                 </p>
             </div>
             <div class="def-panel" id="aic">
@@ -64,16 +64,28 @@
                     Number of bills that were sponsored by a particular member of the House of Representatives that received “Action in Committee,” such as being the focus of committee markup, the subject of a committee hearing and/or receiving a vote in committee.
                 </p>
             </div>
-            <div class="def-panel" id="abc">
-                <h3>ABC</h3>
+            <div class="def-panel" id="below">
+                <h3>Below Expectations</h3>
                 <p>
-                    Number of bills that were sponsored by a particular member of the House of Representatives that received “Action beyond Committee,” meaning that the bill has been successfully reported out of committee and/or been the subject of debate and/or receiving a vote on the floor of the House of Representatives.
+                    A Representative’s Legislative Effectiveness Score is denoted as being “Below Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is lower than .50.
                 </p>
             </div>
-            <div class="def-panel" id="pass">
-                <h3>PASS</h3>
+            <div class="def-panel" id="benchmarkscore">
+                <h3>Benchmark Score</h3>
                 <p>
-                    Number of bills that were sponsored by a particular member of the House of Representatives that passed the House of Representatives.
+                    The Benchmark Score for a member of the House of Representatives is the expected Legislative Effectiveness Score for a Representative in a given Congress who is of the same political party, has served the same number of terms in Congress, and has held the same number of Committee and/or Subcommittee Chairmanships as the given member.
+                </p>
+            </div>
+            <div class="def-panel" id="bill">
+                <h3>BILL</h3>
+                <p>
+                    Number of bills (H.R.s) that were sponsored by a particular member of the House of Representatives.
+                </p>
+            </div>
+            <div class="def-panel" id="cbill">
+                <h3>Commemorative (C) Bills</h3>
+                <p>
+                    A bill is denoted as “Commemorative” if it the substance of the legislation satisfies one of several criteria deeming it as commemorative or symbolic in purpose, such as the naming and/or renaming of public buildings, the striking of commemorative coins and medals, and related matters.
                 </p>
             </div>
             <div class="def-panel" id="law">
@@ -82,10 +94,22 @@
                     Number of bills that were sponsored by a particular member of the House of Representatives that became law.
                 </p>
             </div>
-            <div class="def-panel" id="cbill">
-                <h3>Commemorative (C) Bills</h3>
+            <div class="def-panel" id="meets">
+                <h3>Meets Expectations</h3>
                 <p>
-                    A bill is denoted as “Commemorative” if it the substance of the legislation satisfies one of several criteria deeming it as commemorative or symbolic in purpose, such as the naming and/or renaming of public buildings, the striking of commemorative coins and medals, and related matters.
+                    A Representative’s Legislative Effectiveness Score is denoted as “Meets Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is between .50 and 1.50.
+                </p>
+            </div>
+            <div class="def-panel" id="pass">
+                <h3>PASS</h3>
+                <p>
+                    Number of bills that were sponsored by a particular member of the House of Representatives that passed the House of Representatives.
+                </p>
+            </div>
+            <div class="def-panel" id="scorecard">
+                <h3>Scorecard</h3>
+                <p>
+                    The LES Scorecard details the 15 indicators used to construct the member’s Legislative Effectiveness Score, based on sponsored bill types and their progression through the legislative process.
                 </p>
             </div>
             <div class="def-panel" id="sbill">
@@ -100,30 +124,6 @@
                     A bill is denoted as “Substantive and Significant” if the bill is mentioned in an end-of-the-year write-up in the Congressional Quarterly (CQ) Almanac that corresponds to the relevant Congress.
                 </p>
             </div>
-            <div class="def-panel" id="benchmarkscore">
-                <h3>Benchmark Score</h3>
-                <p>
-                    The Benchmark Score for a member of the House of Representatives is the expected Legislative Effectiveness Score for a Representative in a given Congress who is of the same political party, has served the same number of terms in Congress, and has held the same number of Committee and/or Subcommittee Chairmanships as the given member.
-                </p>
-            </div>
-            <div class="def-panel" id="below">
-                <h3>Below Expectations</h3>
-                <p>
-                    A Representative’s Legislative Effectiveness Score is denoted as being “Below Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is lower than .50.
-                </p>
-            </div>
-            <div class="def-panel" id="meets">
-                <h3>Meets Expectations</h3>
-                <p>
-                    A Representative’s Legislative Effectiveness Score is denoted as “Meets Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is between .50 and 1.50.
-                </p>
-            </div>
-            <div class="def-panel" id="above">
-                <h3>Above Expectations</h3>
-                <p>
-                    A Representative’s Legislative Effectiveness Score is denoted as being “Above Expectations” if the ration of her Legislative Effectiveness Score to her Benchmark Score is greater than 1.50.
-                </p>
-            </div>
         </div>
         <div class="col-md-3">
             <div class="defs-sidebar" data-offset-top="123" bs-affix>
@@ -132,53 +132,53 @@
                     <li>
                         <a href="#collecting" offset="60" du-smooth-scroll du-scrollspy>Collecting Data</a>
                     </li>
-                    <li du-scrollspy="benchmark">
-                        <a href="#benchmark" offset="60" du-smooth-scroll du-scrollspy>Benchmark Scores</a>
-                    </li>
                     <li du-scrollspy="lescore">
                         <a href="#lescore" offset="60" du-smooth-scroll du-scrollspy>LES</a>
+                    </li>
+                    <li du-scrollspy="benchmark">
+                        <a href="#benchmark" offset="60" du-smooth-scroll du-scrollspy>Benchmark Scores</a>
                     </li>
                 </ul>
                 <h5>Glossary</h5>
                 <ul class="nav nav-pill nav-stacked">
                     <li>
-                        <a href="#scorecard" offset="60" du-smooth-scroll du-scrollspy>Scorecard</a>
-                    </li>    
+                        <a href="#abc" offset="60" du-smooth-scroll du-scrollspy>ABC</a>
+                    </li>
                     <li>
-                        <a href="#bill" offset="60" du-smooth-scroll du-scrollspy>BILL</a>
+                        <a href="#above" offset="60" du-smooth-scroll du-scrollspy>Above Expectations</a>
                     </li>
                     <li>
                         <a href="#aic" offset="60" du-smooth-scroll du-scrollspy>AIC</a>
                     </li>
                     <li>
-                        <a href="#abc" offset="60" du-smooth-scroll du-scrollspy>ABC</a>
-                    </li>
-                    <li>
-                        <a href="#pass" offset="60" du-smooth-scroll du-scrollspy>PASS</a>
-                    </li>
-                    <li>
-                        <a href="#law" offset="60" du-smooth-scroll du-scrollspy>LAW</a>
-                    </li>
-                    <li>
-                        <a href="#cbill" offset="60" du-smooth-scroll du-scrollspy>Commemorative</a>
-                    </li>
-                    <li>
-                        <a href="#sbill" offset="60" du-smooth-scroll du-scrollspy>Substantive</a>
-                    </li>
-                    <li>
-                        <a href="#ssbill" offset="60" du-smooth-scroll du-scrollspy>Substantive and Significant</a>
+                        <a href="#below" offset="60" du-smooth-scroll du-scrollspy>Below Expectations</a>
                     </li>
                     <li>
                         <a href="#benchmarkscore" offset="60" du-smooth-scroll du-scrollspy>Benchmark</a>
                     </li>
                     <li>
-                        <a href="#below" offset="60" du-smooth-scroll du-scrollspy>Below Expectations</a>
+                        <a href="#bill" offset="60" du-smooth-scroll du-scrollspy>BILL</a>
+                    </li>
+                    <li>
+                        <a href="#cbill" offset="60" du-smooth-scroll du-scrollspy>Commemorative</a>
+                    </li>
+                    <li>
+                        <a href="#law" offset="60" du-smooth-scroll du-scrollspy>LAW</a>
                     </li>
                     <li>
                         <a href="#meets" offset="60" du-smooth-scroll du-scrollspy>Meets Exepctations</a>
                     </li>
                     <li>
-                        <a href="#above" offset="60" du-smooth-scroll du-scrollspy>Above Expectations</a>
+                        <a href="#pass" offset="60" du-smooth-scroll du-scrollspy>PASS</a>
+                    </li>
+                    <li>
+                        <a href="#scorecard" offset="60" du-smooth-scroll du-scrollspy>Scorecard</a>
+                    </li>    
+                    <li>
+                        <a href="#sbill" offset="60" du-smooth-scroll du-scrollspy>Substantive</a>
+                    </li>
+                    <li>
+                        <a href="#ssbill" offset="60" du-smooth-scroll du-scrollspy>Substantive and Significant</a>
                     </li>
                 </ul>
             </div>
