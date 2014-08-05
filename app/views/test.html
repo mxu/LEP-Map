@@ -5,9 +5,14 @@
 </div>
 <div class="container-fluid container-research">
     <div class="container">
-        <div class="row" ng-repeat="val in test.someObject">
+        <a href="" class="btn btn-default btn-block" ng-click="test.doSomething()">
+            Swap
+        </a>
+        <div class="row" ng-repeat="val in test.theArray">
             <div class="col-xs-12">
-                <span bs-tooltip="'string'" data-title="'title'" data-trigger="click" class="glyphicon glyphicon-warning-sign"></span>
+                <h2>
+                    <span bs-tooltip="'string'" data-title="'title'" class="glyphicon glyphicon-warning-sign"></span>&nbsp;{{val}}
+                </h2>
             </div>
         </div>
     </div>
