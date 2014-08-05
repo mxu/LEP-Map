@@ -35,11 +35,11 @@
                     A Representative’s Benchmark Score is established by the following two step procedure:
                 </p>
                 <p>
-                    First, we estimate an Ordinary Least Squares regression model with robust standard errors (clustered by Representative) where the dependent variable is Representative i’s LES in Congress t, and the independent variables are Representative i’s Seniority in Congress t, a dummy variable that indicates whether she was a member of the majority party in Congress t, and dummy variables that indicate whether she was a committee and/or subcommittee chair in Congress t.  After estimating the regression coefficients that correspond to the each of the independent variables, we generated predicted values for each Representative’s LES in a given congress by generating linear predictions from our estimated regression coefficients and the data.  That is, we estimated a legislator’s predicted LES in congress t (denoted <img src="images/eq2.png" align="middle"/>̂) in the following manner:
+                    First, for each Congress, we estimate an Ordinary Least Squares regression model where the dependent variable is Representative i’s LES, and the independent variables are Representative i’s Seniority, an indicator variable for whether she was a member of the majority party, and indicator variables for whether she held a committee and/or subcommittee chair. After estimating the regression coefficients that correspond to each of the independent variables, we generated linear predicted values for each Representative's LES in the given Congress.
                     <img src="images/eq3.png" class="img-responsive"/>
                 </p>
                 <p>
-                    The predicted values that emerge from this second-state analysis are denoted as Representative’s “Benchmark Scores” that we refer to on the pages of this website.  
+                    The predicted value is denoted as the Representative's “Benchmark Score” that we refer to on the pages of this website.
                 </p>
                 <p>
                     Having identified a Representative’s Benchmark Score, we denote a Representative’s Legislative Effectiveness Score as being "Above Expectations" if the ratio of her Legislative Effectiveness Score to her Benchmark Score is greater than 1.50. We denote a Representative's Legislative Effectiveness Score as being "Below Expectations" if the ratio of her Legislative Effectiveness Score to her Benchmark Score is less than .50. Finally, we denote a Representative’s Legislative Effectiveness Score as "Meets Expectations" if the ratio of her Legislative Effectiveness Score to her Benchmark Score is between .50 and 1.50.
@@ -48,9 +48,7 @@
             <h2>Glossary</h2>
             <div class="def-panel" id="abc">
                 <h3>ABC</h3>
-                <p>
-                    Number of bills that were sponsored by a particular member of the House of Representatives that received “Action beyond Committee,” meaning that the bill has been successfully reported out of committee and/or been the subject of debate and/or receiving a vote on the floor of the House of Representatives.
-                </p>
+                <p>Number of bills that were sponsored by a particular member of the House of Representatives that received “Action beyond Committee,” meaning that the bill has been successfully reported out of committee and/or has been the subject of debate and/or has received a vote on the floor of the House of Representatives.</p>
             </div>
             <div class="def-panel" id="above">
                 <h3>Above Expectations</h3>
@@ -60,21 +58,15 @@
             </div>
             <div class="def-panel" id="aic">
                 <h3>AIC</h3>
-                <p>
-                    Number of bills that were sponsored by a particular member of the House of Representatives that received “Action in Committee,” such as being the focus of committee markup, the subject of a committee hearing and/or receiving a vote in committee.
-                </p>
+                <p>Number of bills that were sponsored by a particular member of the House of Representatives that received “Action in Committee,” such as being the focus of committee markup, the subject of a committee hearing and/or receiving a vote in committee or subcommittee.</p>
             </div>
             <div class="def-panel" id="below">
                 <h3>Below Expectations</h3>
-                <p>
-                    A Representative’s Legislative Effectiveness Score is denoted as being “Below Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is lower than .50.
-                </p>
+                <p>A Representative’s Legislative Effectiveness Score is denoted as being “Below Expectations” if the ratio of her Legislative Effectiveness Score to her Benchmark Score is lower than 0.50.</p>
             </div>
             <div class="def-panel" id="benchmarkscore">
                 <h3>Benchmark Score</h3>
-                <p>
-                    The Benchmark Score for a member of the House of Representatives is the expected Legislative Effectiveness Score for a Representative in a given Congress who is of the same political party, has served the same number of terms in Congress, and has held the same number of Committee and/or Subcommittee Chairmanships as the given member.
-                </p>
+                <p>The Benchmark Score for a member of the House of Representatives is the expected Legislative Effectiveness Score for a Representative in a given Congress who is of the same political party, has served the same number of terms in Congress, and matches the given member's Committee or Subcommittee Chairmanship status.</p>
             </div>
             <div class="def-panel" id="bill">
                 <h3>BILL</h3>
@@ -84,9 +76,7 @@
             </div>
             <div class="def-panel" id="cbill">
                 <h3>Commemorative (C) Bills</h3>
-                <p>
-                    A bill is denoted as “Commemorative” if it the substance of the legislation satisfies one of several criteria deeming it as commemorative or symbolic in purpose, such as the naming and/or renaming of public buildings, the striking of commemorative coins and medals, and related matters.
-                </p>
+                <p>A bill is denoted as “Commemorative” if the substance of the legislation satisfies one of several criteria deeming it as commemorative or symbolic in purpose, such as the naming and/or renaming of public buildings, the minting of commemorative coins and medals, and related matters.</p>
             </div>
             <div class="def-panel" id="law">
                 <h3>LAW</h3>

@@ -107,9 +107,9 @@
                         Representative
                     </a> 
                     <span ng-show="checkOrder('repName')">
-                        <span ng-show="!reverseSort"
+                        <span ng-show="!sort.reverse"
                               class="glyphicon glyphicon-sort-by-alphabet"></span>
-                        <span ng-show="reverseSort"
+                        <span ng-show="sort.reverse"
                               class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
                     </span>
                 </div>
@@ -118,9 +118,9 @@
                         Party
                     </a> 
                     <span ng-show="checkOrder('party')">
-                        <span ng-show="!reverseSort"
+                        <span ng-show="!sort.reverse"
                               class="glyphicon glyphicon-sort-by-alphabet"></span>
-                        <span ng-show="reverseSort"
+                        <span ng-show="sort.reverse"
                               class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
                     </span>
                 </div>
@@ -129,9 +129,9 @@
                         District
                     </a>
                     <span ng-show="checkOrder(['stName', 'cd'])">
-                        <span ng-show="!reverseSort"
+                        <span ng-show="!sort.reverse"
                               class="glyphicon glyphicon-sort-by-order"></span>
-                        <span ng-show="reverseSort"
+                        <span ng-show="sort.reverse"
                               class="glyphicon glyphicon-sort-by-order-alt"></span>
                     </span>
                 </div>
@@ -143,9 +143,9 @@
                         LES
                     </a>
                     <span ng-show="checkOrder('les')">
-                        <span ng-show="!reverseSort"
+                        <span ng-show="!sort.reverse"
                               class="glyphicon glyphicon-sort-by-attributes"></span>
-                        <span ng-show="reverseSort"
+                        <span ng-show="sort.reverse"
                               class="glyphicon glyphicon-sort-by-attributes-alt"></span>
                     </span>
                 </div>
@@ -157,9 +157,9 @@
                         Benchmark
                     </a>
                     <span ng-show="checkOrder('benchmark')">
-                        <span ng-show="!reverseSort"
+                        <span ng-show="!sort.reverse"
                               class="glyphicon glyphicon-sort-by-attributes"></span>
-                        <span ng-show="reverseSort"
+                        <span ng-show="sort.reverse"
                                 class="glyphicon glyphicon-sort-by-attributes-alt"></span>
                     </span>
                 </div>
@@ -171,9 +171,9 @@
                         Party Rank
                     </a>
                     <span ng-show="checkOrder(['party', 'partyRank'])">
-                        <span ng-show="!reverseSort"
+                        <span ng-show="!sort.reverse"
                               class="glyphicon glyphicon-sort-by-order"></span>
-                        <span ng-show="reverseSort"
+                        <span ng-show="sort.reverse"
                               class="glyphicon glyphicon-sort-by-order-alt"></span>
                     </span>
                 </div>
