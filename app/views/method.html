@@ -10,19 +10,19 @@
             <div class="def-panel" id="collecting">
                 <h3>Collecting Data</h3>
                 <p>
-                    To generate the Legislative Effectiveness Score, and related metrics, we rely on computer code written to collect all relevant information from the Library of Congress website, THOMAS, for every public house bill (H.R.) that was introduced into the 93rd - 112th Congresses (1973-2012).  For every bill, we identify the sponsor and every step in the legislative process as identified in the “All Congressional Actions with Amendments” section of the bill’s “summary and status” hyperlink.  After collecting this information, we code the dates and incidence of each major stage of each bill’s progression through the legislative life cycle, which serves as the foundation for our metrics.
+                    To generate the Legislative Effectiveness Score and related metrics, we rely on computer code to collect all relevant information from the Library of Congress website, THOMAS, for every public house bill (H.R.) that was introduced into the 93rd - 112th Congresses (1973-2012). For every bill, we identify the sponsor and every step in the legislative process as identified in the “All Congressional Actions with Amendments” section of the bill’s “summary and status” hyperlink. After collecting this information, we code the dates and incidence of each major stage of each bill’s progression through the legislative life cycle, serving as the foundation for our metrics.
                 </p>
             </div>
             <div class="def-panel" id="lescore">
             <h3>Legislative Effectiveness Scores</h3>
                 <p>
-                    To calculate the Legislative Effectiveness Score, we draw on several indicators that collectively capture the proven ability of a Representative to advance her agenda items through the legislative process and into law.  More specifically, we identify the number of bills that each member of the House of Representatives sponsored (BILL); and the number of those bills that received any action in committee (AIC), or action beyond committee (ABC) on the floor of the House.  For those bills that received any action beyond committee, we also identify how many of those bills subsequently passed the House (PASS), and how many subsequently became law (LAW).
+                    To calculate the Legislative Effectiveness Score, we draw on fifteen indicators that collectively capture the proven ability of a Representative to advance her agenda items through the legislative process and into law. More specifically, we identify the number of bills that each member of the House of Representatives sponsored (BILL); and the number of those bills that received any action in committee (AIC), or action beyond committee (ABC) on the floor of the House. For those bills that received any action beyond committee, we also identify how many of those bills subsequently passed the House (PASS), and how many became law (LAW).
                 </p> 
                 <p>
-                    Drawing on these data, we categorize all bills as being either commemorative (C), substantive (S), or substantive and significant (SS).  Our categorization is based on the following coding protocol.  A bill is deemed substantive and significant if it had been the subject of an end-of-the-year write-up in the Congressional Quarterly Almanac.  A bill was deemed commemorative if it satisfied any one of several criteria, such as providing for a renaming, commemoration, private relief of an individual, and the like.  Finally, all other bills, and any erstwhile “commemorative” bills that were also the subject of a CQ Almanac write-up were classified as substantive.  For each of these three categories of bills we relied on our five important stages of the legislative process to produce our final set of fifteen indicator variables.
+                    We categorize all bills as being either commemorative (C), substantive (S), or substantive and significant (SS). Our categorization is based on the following coding protocol. A bill is deemed substantive and significant if it had been the subject of an end-of-the-year write-up in the Congressional Quarterly Almanac. A bill was deemed commemorative if it satisfied any one of several criteria, such as providing for a renaming, commemoration, private relief of an individual, and the like. Finally, all other bills, and any erstwhile “commemorative” bills that were also the subject of a CQ Almanac write-up were classified as substantive. For each of these three categories of bills we relied on our five important stages of the legislative process (above) to produce our final set of fifteen indicator variables.
                 </p>
                 <p>
-                    Having compiled fifteen indicators of effectiveness, we calculated a Legislative Effectiveness Score (LES), for each member i in each Congress t, as follows:
+                    Having compiled fifteen indicators of effectiveness, we calculated a Legislative Effectiveness Score (LES), for each member i, in each Congress t, as follows:
                 </p>
                 <img src="images/eq1.png" class="center-block img-responsive" height="50%" width="50%"></img>
                 <p>
@@ -48,7 +48,7 @@
             <h2>Glossary</h2>
             <div class="def-panel" id="abc">
                 <h3>ABC</h3>
-                <p>Number of bills that were sponsored by a particular member of the House of Representatives that received “Action beyond Committee,” meaning that the bill has been successfully reported out of committee and/or has been the subject of debate and/or has received a vote on the floor of the House of Representatives.</p>
+                <p>Number of bills that were sponsored by a particular member of the House of Representatives that received “Action beyond Committee,” meaning that the bill has reached the floor of the House of Representatives.</p>
             </div>
             <div class="def-panel" id="above">
                 <h3>Above Expectations</h3>
@@ -104,9 +104,7 @@
             </div>
             <div class="def-panel" id="sbill">
                 <h3>Substantive (S) Bills</h3>
-                <p>
-                    A bill is denoted as “Substantive” if it is neither Commemorative or Substantive and Significant, according to our coding protocol; or, if it would have been denoted as Commemorative, but it was mentioned in an end-of-the-year write-up in the Congressional Quarterly (CQ) Almanac that corresponds to the relevant Congress 
-                </p>
+                <p>A bill is denoted as “Substantive” if it is neither Commemorative nor Substantive and Significant, according to our coding protocol; or, if it would have been denoted as Commemorative, but it was mentioned in an end-of-the-year write-up in the Congressional Quarterly Almanac that corresponds to the relevant Congress.</p>
             </div>
             <div class="def-panel" id="ssbill">
                 <h3>Substantive and Significant (SS) Bills</h3>

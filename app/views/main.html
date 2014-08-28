@@ -1,6 +1,11 @@
 <tour step="tourtips.currentStep"
       post-tour="tourComplete()">
 
+    <div class="container-fluid" style="height: 32px; background-color: #fcffbe; position: absolute; top: 50px; z-index: 50; width: 100%;" ng-hide="hideBanner == true">
+      <span style="color: #333; display: inline-block; padding-top: 10px;">Find Representatives and Assess their Effectiveness as Lawmakers</span>
+      <a ng-click="hideBanner = true" href="" class="pull-right" style="display: inline-block; height: 32px; padding: 10px;"><span class="glyphicon glyphicon-remove"></span></a>
+    </div>
+
     <!-- MAP -->
     <div id="map"
          class="container-fluid container-map">
@@ -39,11 +44,16 @@
                             tourtip-placement="bottom">
                         Selected State
                     </strong>
-                    <input type="text"
+                    <!-- <input type="text"
                            class="form-control input-sm"
                            placeholder="state"
                            ng-model="select.state"
-                           readonly>
+                           readonly> -->
+                    <select class="form-control input-sm"
+                            ng-options="stateName as stateName for stateName in stateNames"
+                            ng-model="select.state"
+                            ng-change="switchState()">
+                    </select>
                 </div>
                 <div class="col-md-3">
                     <strong tourtip="{{tourtips.zip}}"
