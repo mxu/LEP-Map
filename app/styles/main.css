@@ -23,8 +23,7 @@ body {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url(https://farm8.staticflickr.com/7349/9733883414_125a361ba1_h.jpg);
-  /*background-image: url(https://farm4.staticflickr.com/3170/3078430084_fd82b69198_b.jpg);*/
+  background-image: url('../images/splash.jpg');
   position: relative;
   display: block;
   z-index: 16;

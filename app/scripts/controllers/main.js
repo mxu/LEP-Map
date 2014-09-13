@@ -177,9 +177,6 @@ angular.module('lepMapApp')
             $scope.congressData[row.congress].states[row.st_name].push(newRep);
           }
 
-          console.log('states:');
-          console.log($scope.stateNames);
-
           // select the most recent congress
           $scope.select.latest = latestCongress.toString();
           $scope.select.congress = $scope.congressData[$scope.select.latest];
@@ -199,9 +196,6 @@ angular.module('lepMapApp')
               }
             }
           }
-
-          // select Washington
-          // stateService.prepForBroadcast('CA', null);
         });
       });
 
@@ -211,15 +205,15 @@ angular.module('lepMapApp')
         $scope.select.zip = stateService.zip;
         if (stateService.code !== null) {
           $scope.select.name = null;
+          $scope.selectCongress();
         }
-        $scope.selectCongress();
       });
 
       // performa a new lookup when a new congress is selected
       $scope.switchCongress = function() {
         $scope.select.zip = null;
         if ($scope.select.name !== null && $scope.select.name !== '') {
-          $scope.lookupName($scope.select.anem);
+          $scope.lookupName($scope.select.name);
         } else {
           $scope.selectCongress();
         }
@@ -227,12 +221,13 @@ angular.module('lepMapApp')
 
       // update list of representatives
       $scope.selectCongress = function() {
-        $scope.select.reps = null;
         if ($scope.select.state === null) {
+          console.log('no state selected');
           $scope.select.reps = null;
+        } else {
+          $scope.select.reps = $scope.select.congress.states[$scope.select.state];
+          $document.scrollToElement(angular.element('#repList'), 50, 300);
         }
-        $scope.select.reps = $scope.select.congress.states[$scope.select.state];
-        $document.scrollToElement(angular.element('#repList'), 50, 300);
       };
 
       $scope.switchState = function() {
@@ -358,12 +353,6 @@ angular.module('lepMapApp')
         // display list of matching reps
         $scope.select.reps = results;
       };
-
-      // scroll back to the top when tour is complete
-      $scope.tourComplete = function() {
-        $document.scrollTo(0, 0, 300);
-      };
-      
     }
   ]);
 

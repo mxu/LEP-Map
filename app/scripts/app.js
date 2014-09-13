@@ -10,7 +10,6 @@
  */
 angular
   .module('lepMapApp', [
-    'ngAnimate',
     'ngRoute',
     'duScroll',
     'mgcrea.ngStrap.helpers.dimensions',

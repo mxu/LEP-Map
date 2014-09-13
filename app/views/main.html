@@ -1,229 +1,208 @@
-<tour step="tourtips.currentStep"
-      post-tour="tourComplete()">
+<div class="container-fluid" style="height: 32px; background-color: #fcffbe; position: absolute; top: 50px; z-index: 50; width: 100%;" ng-hide="hideBanner == true">
+  <span style="color: #333; display: inline-block; padding-top: 10px;">Find Representatives and Assess their Effectiveness as Lawmakers</span>
+  <a ng-click="hideBanner = true" href="" class="pull-right" style="display: inline-block; height: 32px; padding: 10px;"><span class="glyphicon glyphicon-remove"></span></a>
+</div>
 
-    <div class="container-fluid" style="height: 32px; background-color: #fcffbe; position: absolute; top: 50px; z-index: 50; width: 100%;" ng-hide="hideBanner == true">
-      <span style="color: #333; display: inline-block; padding-top: 10px;">Find Representatives and Assess their Effectiveness as Lawmakers</span>
-      <a ng-click="hideBanner = true" href="" class="pull-right" style="display: inline-block; height: 32px; padding: 10px;"><span class="glyphicon glyphicon-remove"></span></a>
+<!-- MAP -->
+<div id="map"
+     class="container-fluid container-map">
+    <div class="container">
+        <d3-map></d3-map>
     </div>
+</div>
+<!-- END MAP -->
 
-    <!-- MAP -->
-    <div id="map"
-         class="container-fluid container-map">
-        <div class="container">
-            <d3-map></d3-map>
-            <div class="btn btn-danger btn-tour"
-                 ng-click="openTour()">
-                Take the Tour
+<!-- CONTROLS -->
+<div class="container-fluid container-controls"
+     data-offset-top="497"
+     bs-affix>
+    <div class="container">
+        <!-- INPUTS -->
+        <div class="row repListControls">
+            <div class="col-md-3">
+                <strong>
+                    Selected Congress
+                </strong>
+                <select class="form-control input-sm"
+                        ng-options="value.num + ' ' + value.year for (key, value) in congressData"
+                        ng-model="select.congress"
+                        ng-change="switchCongress()">
+                </select>
+            </div>
+            <div class="col-md-3">
+                <strong>
+                    Selected State
+                </strong>
+                <!-- <input type="text"
+                       class="form-control input-sm"
+                       placeholder="state"
+                       ng-model="select.state"
+                       readonly> -->
+                <select class="form-control input-sm"
+                        ng-options="stateName as stateName for stateName in stateNames"
+                        ng-model="select.state"
+                        ng-change="switchState()">
+                </select>
+            </div>
+            <div class="col-md-3">
+                <strong>
+                    Search By Zip
+                </strong>
+                <form class="form-inline"
+                      role="form"
+                      bs-tooltip="tooltips.zip">
+                    <div class="input-group input-group-sm">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="select.zip"
+                               placeholder="zip">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default"
+                                    ng-click="lookupZip(select.zip)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3">
+                <strong>
+                    Search By Name
+                </strong>
+                <form class="form-inline"
+                      role="form">
+                    <div class="input-group input-group-sm">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="select.name"
+                               placeholder="name">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default"
+                                    ng-click="lookupName(select.name)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END INPUTS -->
+        <hr>
+        <!-- RESULTS HEADER -->
+        <div class="row repListHeader">
+            <div class="col-md-3">
+                <span class="glyphicon glyphicon-question-sign"
+                      bs-tooltip="tooltips.representative"
+                      data-placement="right"></span>
+                <a ng-click="setOrder('repName')">
+                    Representative
+                </a> 
+                <span ng-show="checkOrder('repName')">
+                    <span ng-show="!sort.reverse"
+                          class="glyphicon glyphicon-sort-by-alphabet"></span>
+                    <span ng-show="sort.reverse"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                </span>
+            </div>
+            <div class="col-md-1">
+                <a ng-click="setOrder('party')">
+                    Party
+                </a> 
+                <span ng-show="checkOrder('party')">
+                    <span ng-show="!sort.reverse"
+                          class="glyphicon glyphicon-sort-by-alphabet"></span>
+                    <span ng-show="sort.reverse"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                </span>
+            </div>
+            <div class="col-md-2">
+                <a ng-click="setOrder(['stName', 'cd'])">
+                    District
+                </a>
+                <span ng-show="checkOrder(['stName', 'cd'])">
+                    <span ng-show="!sort.reverse"
+                          class="glyphicon glyphicon-sort-by-order"></span>
+                    <span ng-show="sort.reverse"
+                          class="glyphicon glyphicon-sort-by-order-alt"></span>
+                </span>
+            </div>
+            <div class="col-md-2">
+                <span class="glyphicon glyphicon-question-sign"
+                      bs-tooltip="tooltips.les"
+                      data-placement="bottom"></span>
+                <a ng-click="setOrder('les')">
+                    LES
+                </a>
+                <span ng-show="checkOrder('les')">
+                    <span ng-show="!sort.reverse"
+                          class="glyphicon glyphicon-sort-by-attributes"></span>
+                    <span ng-show="sort.reverse"
+                          class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                </span>
+            </div>
+            <div class="col-md-2">
+                <span class="glyphicon glyphicon-question-sign"
+                      bs-tooltip="tooltips.benchmark"
+                      data-placement="bottom"></span>
+                <a ng-click="setOrder('benchmark')">
+                    Benchmark
+                </a>
+                <span ng-show="checkOrder('benchmark')">
+                    <span ng-show="!sort.reverse"
+                          class="glyphicon glyphicon-sort-by-attributes"></span>
+                    <span ng-show="sort.reverse"
+                            class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                </span>
+            </div>
+            <div class="col-md-2">
+                <span class="glyphicon glyphicon-question-sign"
+                      bs-tooltip="tooltips.partyRank"
+                      data-placement="bottom"></span>
+                <a ng-click="setOrder(['party', 'partyRank'])">
+                    Party Rank
+                </a>
+                <span ng-show="checkOrder(['party', 'partyRank'])">
+                    <span ng-show="!sort.reverse"
+                          class="glyphicon glyphicon-sort-by-order"></span>
+                    <span ng-show="sort.reverse"
+                          class="glyphicon glyphicon-sort-by-order-alt"></span>
+                </span>
+            </div>
+        </div>
+        <!-- END RESULTS HEADER -->
+    </div>
+</div>
+<!-- END CONTROLS -->
+
+<!-- RESULTS -->
+<div id="repList"
+     class="container-fluid container-rep-list">
+    <div class="container">
+        <div class="row row-rep"
+             ng-repeat="rep in select.reps|orderBy:sort.field:sort.reverse"
+             ng-click="showRep(rep)">
+            <div class="col-md-3">
+                <strong>{{rep.repName}}</strong>
+            </div>
+            <div class="col-md-1">
+                {{rep.party.substring(0,3)}}
+            </div>
+            <div class="col-md-2">
+                {{rep.stName}}-{{rep.cd}}
+            </div>
+            <div class="col-md-2">
+                <span class="text-{{expectText(rep.expect)}}">
+                    <span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}" bs-tooltip data-title="{{expectTooltip(rep.expect)}}"></span>
+                      &nbsp;<strong>{{rep.les.toFixed(3)}}</strong>
+                </span>
+            </div>
+            <div class="col-md-2">
+                {{rep.benchmark.toFixed(3)}}
+            </div>
+            <div class="col-md-2">
+                {{rep.partyRank}} / {{rep.totalInParty}}
             </div>
         </div>
     </div>
-    <!-- END MAP -->
-
-    <!-- CONTROLS -->
-    <div class="container-fluid container-controls"
-         data-offset-top="497"
-         bs-affix>
-        <div class="container">
-            <!-- INPUTS -->
-            <div class="row repListControls">
-                <div class="col-md-3">
-                    <strong tourtip="{{tourtips.congress}}"
-                            tourtip-step="0"
-                            tourtip-placement="bottom">
-                        Selected Congress
-                    </strong>
-                    <select class="form-control input-sm"
-                            ng-options="value.num + ' ' + value.year for (key, value) in congressData"
-                            ng-model="select.congress"
-                            ng-change="switchCongress()">
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <strong tourtip="{{tourtips.state}}"
-                            tourtip-step="1"
-                            tourtip-placement="bottom">
-                        Selected State
-                    </strong>
-                    <!-- <input type="text"
-                           class="form-control input-sm"
-                           placeholder="state"
-                           ng-model="select.state"
-                           readonly> -->
-                    <select class="form-control input-sm"
-                            ng-options="stateName as stateName for stateName in stateNames"
-                            ng-model="select.state"
-                            ng-change="switchState()">
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <strong tourtip="{{tourtips.zip}}"
-                            tourtip-step="2"
-                            tourtip-placement="bottom">
-                        Search By Zip
-                    </strong>
-                    <form class="form-inline"
-                          role="form"
-                          bs-tooltip="tooltips.zip">
-                        <div class="input-group input-group-sm">
-                            <input type="text"
-                                   class="form-control"
-                                   ng-model="select.zip"
-                                   placeholder="zip">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default"
-                                        ng-click="lookupZip(select.zip)">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-3">
-                    <strong tourtip="{{tourtips.name}}"
-                            tourtip-step="3"
-                            tourtip-placement="bottom">
-                        Search By Name
-                    </strong>
-                    <form class="form-inline"
-                          role="form">
-                        <div class="input-group input-group-sm">
-                            <input type="text"
-                                   class="form-control"
-                                   ng-model="select.name"
-                                   placeholder="name">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default"
-                                        ng-click="lookupName(select.name)">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- END INPUTS -->
-            <hr>
-            <!-- RESULTS HEADER -->
-            <div class="row repListHeader"
-                 tourtip="{{tourtips.list}}"
-                 tourtip-step="4"
-                 tourtip-next-label="Done"
-                 tourtip-placement="bottom">
-                <div class="col-md-3">
-                    <span class="glyphicon glyphicon-question-sign"
-                          bs-tooltip="tooltips.representative"
-                          data-placement="right"></span>
-                    <a ng-click="setOrder('repName')">
-                        Representative
-                    </a> 
-                    <span ng-show="checkOrder('repName')">
-                        <span ng-show="!sort.reverse"
-                              class="glyphicon glyphicon-sort-by-alphabet"></span>
-                        <span ng-show="sort.reverse"
-                              class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
-                    </span>
-                </div>
-                <div class="col-md-1">
-                    <a ng-click="setOrder('party')">
-                        Party
-                    </a> 
-                    <span ng-show="checkOrder('party')">
-                        <span ng-show="!sort.reverse"
-                              class="glyphicon glyphicon-sort-by-alphabet"></span>
-                        <span ng-show="sort.reverse"
-                              class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
-                    </span>
-                </div>
-                <div class="col-md-2">
-                    <a ng-click="setOrder(['stName', 'cd'])">
-                        District
-                    </a>
-                    <span ng-show="checkOrder(['stName', 'cd'])">
-                        <span ng-show="!sort.reverse"
-                              class="glyphicon glyphicon-sort-by-order"></span>
-                        <span ng-show="sort.reverse"
-                              class="glyphicon glyphicon-sort-by-order-alt"></span>
-                    </span>
-                </div>
-                <div class="col-md-2">
-                    <span class="glyphicon glyphicon-question-sign"
-                          bs-tooltip="tooltips.les"
-                          data-placement="bottom"></span>
-                    <a ng-click="setOrder('les')">
-                        LES
-                    </a>
-                    <span ng-show="checkOrder('les')">
-                        <span ng-show="!sort.reverse"
-                              class="glyphicon glyphicon-sort-by-attributes"></span>
-                        <span ng-show="sort.reverse"
-                              class="glyphicon glyphicon-sort-by-attributes-alt"></span>
-                    </span>
-                </div>
-                <div class="col-md-2">
-                    <span class="glyphicon glyphicon-question-sign"
-                          bs-tooltip="tooltips.benchmark"
-                          data-placement="bottom"></span>
-                    <a ng-click="setOrder('benchmark')">
-                        Benchmark
-                    </a>
-                    <span ng-show="checkOrder('benchmark')">
-                        <span ng-show="!sort.reverse"
-                              class="glyphicon glyphicon-sort-by-attributes"></span>
-                        <span ng-show="sort.reverse"
-                                class="glyphicon glyphicon-sort-by-attributes-alt"></span>
-                    </span>
-                </div>
-                <div class="col-md-2">
-                    <span class="glyphicon glyphicon-question-sign"
-                          bs-tooltip="tooltips.partyRank"
-                          data-placement="bottom"></span>
-                    <a ng-click="setOrder(['party', 'partyRank'])">
-                        Party Rank
-                    </a>
-                    <span ng-show="checkOrder(['party', 'partyRank'])">
-                        <span ng-show="!sort.reverse"
-                              class="glyphicon glyphicon-sort-by-order"></span>
-                        <span ng-show="sort.reverse"
-                              class="glyphicon glyphicon-sort-by-order-alt"></span>
-                    </span>
-                </div>
-            </div>
-            <!-- END RESULTS HEADER -->
-        </div>
-    </div>
-    <!-- END CONTROLS -->
-
-    <!-- RESULTS -->
-    <div id="repList"
-         class="container-fluid container-rep-list">
-        <div class="container">
-            <div class="row row-rep"
-                 ng-repeat="rep in select.reps|orderBy:sort.field:sort.reverse"
-                 ng-click="showRep(rep)">
-                <div class="col-md-3">
-                    <strong>{{rep.repName}}</strong>
-                </div>
-                <div class="col-md-1">
-                    {{rep.party.substring(0,3)}}
-                </div>
-                <div class="col-md-2">
-                    {{rep.stName}}-{{rep.cd}}
-                </div>
-                <div class="col-md-2">
-                    <span class="text-{{expectText(rep.expect)}}">
-                        <span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}" bs-tooltip data-title="{{expectTooltip(rep.expect)}}"></span>
-                          &nbsp;<strong>{{rep.les.toFixed(3)}}</strong>
-                    </span>
-                </div>
-                <div class="col-md-2">
-                    {{rep.benchmark.toFixed(3)}}
-                </div>
-                <div class="col-md-2">
-                    {{rep.partyRank}} / {{rep.totalInParty}}
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END RESULTS -->
-
-</tour>
+</div>
+<!-- END RESULTS -->
