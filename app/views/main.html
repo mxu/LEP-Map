@@ -1,6 +1,14 @@
+<div class="shadow" ng-show="tourtips.currentStep > 0"></div>
 <div class="container-fluid" style="height: 32px; background-color: #fcffbe; position: absolute; top: 50px; z-index: 50; width: 100%;" ng-hide="hideBanner == true">
   <span style="color: #333; display: inline-block; padding-top: 10px;">Find Representatives and Assess their Effectiveness as Lawmakers</span>
   <a ng-click="hideBanner = true" href="" class="pull-right" style="display: inline-block; height: 32px; padding: 10px;"><span class="glyphicon glyphicon-remove"></span></a>
+</div>
+
+<div class="tour-tip" ng-show="tourtips.currentStep > 0">
+  {{tourtips.currentStep}}: {{tourtips.steps[tourtips.currentStep]}}
+  <button class="pull-right btn btn-xs btn-danger" ng-click="setStep(0);">Close</button>
+  <button class="pull-right btn btn-xs btn-default" style="margin-right:8px;" ng-class="{disabled: tourtips.currentStep == tourtips.steps.length - 1}" ng-click="tourtips.currentStep = tourtips.currentStep + 1">Next</button>
+  <button class="pull-right btn btn-xs btn-default" style="margin-right:8px;" ng-class="{disabled: tourtips.currentStep == 1}" ng-click="tourtips.currentStep = tourtips.currentStep - 1">Last</button>
 </div>
 
 <!-- MAP -->
@@ -8,6 +16,7 @@
      class="container-fluid container-map">
     <div class="container">
         <d3-map></d3-map>
+        <button class="btn btn-danger btn-tour" ng-click="tourtips.currentStep = 1">Take a tour</button>
     </div>
 </div>
 <!-- END MAP -->
@@ -16,10 +25,11 @@
 <div class="container-fluid container-controls"
      data-offset-top="497"
      bs-affix>
+    <div class="small-shadow" ng-show="tourtips.currentStep > 0"></div>
     <div class="container">
         <!-- INPUTS -->
         <div class="row repListControls">
-            <div class="col-md-3">
+            <div class="col-xs-3 col-ctrl" ng-class="{spotlight: tourtips.currentStep == 1}">
                 <strong>
                     Selected Congress
                 </strong>
@@ -29,7 +39,7 @@
                         ng-change="switchCongress()">
                 </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-xs-3 col-ctrl" ng-class="{spotlight: tourtips.currentStep == 2}">
                 <strong>
                     Selected State
                 </strong>
@@ -44,7 +54,7 @@
                         ng-change="switchState()">
                 </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-xs-3 col-ctrl" ng-class="{spotlight: tourtips.currentStep == 2}">
                 <strong>
                     Search By Zip
                 </strong>
@@ -65,7 +75,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-3">
+            <div class="col-xs-3 col-ctrl" ng-class="{spotlight: tourtips.currentStep == 2}">
                 <strong>
                     Search By Name
                 </strong>
@@ -89,8 +99,8 @@
         <!-- END INPUTS -->
         <hr>
         <!-- RESULTS HEADER -->
-        <div class="row repListHeader">
-            <div class="col-md-3">
+        <div class="row repListHeader" ng-class="{spotlight: tourtips.currentStep == 3}">
+            <div class="col-xs-3 col-ctrl">
                 <span class="glyphicon glyphicon-question-sign"
                       bs-tooltip="tooltips.representative"
                       data-placement="right"></span>
@@ -104,7 +114,7 @@
                           class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
                 </span>
             </div>
-            <div class="col-md-1">
+            <div class="col-xs-1 col-ctrl" ng-class="{spotlight: tourtips.currentStep == 3}">
                 <a ng-click="setOrder('party')">
                     Party
                 </a> 
@@ -115,7 +125,7 @@
                           class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
                 </span>
             </div>
-            <div class="col-md-2">
+            <div class="col-xs-2 col-ctrl" ng-class="{spotlight: tourtips.currentStep == 3}">
                 <a ng-click="setOrder(['stName', 'cd'])">
                     District
                 </a>
@@ -126,7 +136,7 @@
                           class="glyphicon glyphicon-sort-by-order-alt"></span>
                 </span>
             </div>
-            <div class="col-md-2">
+            <div class="col-xs-2 col-ctrl" ng-class="{spotlight: tourtips.currentStep == 3}">
                 <span class="glyphicon glyphicon-question-sign"
                       bs-tooltip="tooltips.les"
                       data-placement="bottom"></span>
@@ -140,7 +150,7 @@
                           class="glyphicon glyphicon-sort-by-attributes-alt"></span>
                 </span>
             </div>
-            <div class="col-md-2">
+            <div class="col-xs-2 col-ctrl" ng-class="{spotlight: tourtips.currentStep == 3}">
                 <span class="glyphicon glyphicon-question-sign"
                       bs-tooltip="tooltips.benchmark"
                       data-placement="bottom"></span>
@@ -154,7 +164,7 @@
                             class="glyphicon glyphicon-sort-by-attributes-alt"></span>
                 </span>
             </div>
-            <div class="col-md-2">
+            <div class="col-xs-2 col-ctrl" ng-class="{spotlight: tourtips.currentStep == 3}">
                 <span class="glyphicon glyphicon-question-sign"
                       bs-tooltip="tooltips.partyRank"
                       data-placement="bottom"></span>
@@ -181,25 +191,25 @@
         <div class="row row-rep"
              ng-repeat="rep in select.reps|orderBy:sort.field:sort.reverse"
              ng-click="showRep(rep)">
-            <div class="col-md-3">
+            <div class="col-xs-3">
                 <strong>{{rep.repName}}</strong>
             </div>
-            <div class="col-md-1">
+            <div class="col-xs-1">
                 {{rep.party.substring(0,3)}}
             </div>
-            <div class="col-md-2">
+            <div class="col-xs-2">
                 {{rep.stName}}-{{rep.cd}}
             </div>
-            <div class="col-md-2">
+            <div class="col-xs-2">
                 <span class="text-{{expectText(rep.expect)}}">
                     <span class="glyphicon glyphicon-{{expectGlyph(rep.expect)}}" bs-tooltip data-title="{{expectTooltip(rep.expect)}}"></span>
                       &nbsp;<strong>{{rep.les.toFixed(3)}}</strong>
                 </span>
             </div>
-            <div class="col-md-2">
+            <div class="col-xs-2">
                 {{rep.benchmark.toFixed(3)}}
             </div>
-            <div class="col-md-2">
+            <div class="col-xs-2">
                 {{rep.partyRank}} / {{rep.totalInParty}}
             </div>
         </div>

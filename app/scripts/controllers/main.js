@@ -34,12 +34,19 @@ angular.module('lepMapApp')
       $scope.congressData = {};
 
       $scope.tourtips = {
-        'currentStep': -1,
-        'congress': 'Step 1: Select a session of Congress to explore',
-        'state': 'Step 2: Search the selected congress by clicking a state on the map...',
-        'zip': '... or search the latest congress by zip...',
-        'name': '... or search the selected congress by representative name',
-        'list': 'Step 3: Browse and compare the list of representatives.  Click a row to view their LES scorecard.  Hover over (?) icons to view an explanation of each term.'
+        'currentStep': 1,
+        'steps': [
+          '',
+          'Select a session of Congress to explore.',
+          'Search the selected congress by selecting a state, typing a zip code, or typing a representative\'s name.',
+          'Browse and sort to compare representatives.  Click a row to view their LES scorecard.  Hover over (?) icons to explain each term.'
+        ]
+      };
+
+      $scope.setStep = function(n) {
+        $scope.tourtips.currentStep = n;
+        console.log(typeof $scope.tourtips.currentStep);
+        console.log($scope.tourtips.steps[n] + ' | ' + $scope.tourtips.steps[$scope.tourtips.currentStep]);
       };
 
       $scope.tooltips = {
@@ -222,11 +229,10 @@ angular.module('lepMapApp')
       // update list of representatives
       $scope.selectCongress = function() {
         if ($scope.select.state === null) {
-          console.log('no state selected');
           $scope.select.reps = null;
         } else {
           $scope.select.reps = $scope.select.congress.states[$scope.select.state];
-          $document.scrollToElement(angular.element('#repList'), 50, 300);
+          $document.scrollToElement(angular.element('#repList'), 53, 300);
         }
       };
 
