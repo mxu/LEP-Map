@@ -34,19 +34,17 @@ angular.module('lepMapApp')
       $scope.congressData = {};
 
       $scope.tourtips = {
-        'currentStep': 1,
+        'currentStep': 0,
         'steps': [
           '',
-          'Select a session of Congress to explore.',
-          'Search the selected congress by selecting a state, typing a zip code, or typing a representative\'s name.',
-          'Browse and sort to compare representatives.  Click a row to view their LES scorecard.  Hover over (?) icons to explain each term.'
+          'Select a Congress to explore.',
+          'Search by state or Representative\'s name for selected Congress, or by zip code for the latest Congress',
+          'Browse and sort to compare Representatives.  Click a row to view their LES scorecards.  Hover over (?) icons to explain each term.'
         ]
       };
 
       $scope.setStep = function(n) {
         $scope.tourtips.currentStep = n;
-        console.log(typeof $scope.tourtips.currentStep);
-        console.log($scope.tourtips.steps[n] + ' | ' + $scope.tourtips.steps[$scope.tourtips.currentStep]);
       };
 
       $scope.tooltips = {
