@@ -500,7 +500,7 @@ path {
 
 .media-thumb {
   font-weight: bold;
-  font-size: 72px;
+  font-size: 52px;
   color: #fff;
   line-height: 360px;
   text-align: center;
@@ -579,6 +579,43 @@ path {
   background-image: url('../images/nytimes.png');
 }
 
+.media-thumb-huffpost {
+  background-image: url('../images/hp.png');
+}
+
+.media-thumb-wvtf {
+  background-image: url('../images/wvtf.png');
+}
+
+.media-thumb-wina {
+  background-image: url('../images/wina.png');
+}
+
+.media-thumb-statesman {
+  background-image: url('../images/statesman.png');
+}
+
+.media-thumb-bj {
+  background-image: url('../images/bj.png');
+}
+
+.media-thumb-cav {
+  background-image: url('../images/cav.png');
+}
+
+.media-thumb-watimes {
+  background-image: url('../images/watimes.png');
+}
+
+.media-thumb-azc {
+  background-image: url('../images/azc.png');
+}
+
+.media-thumb-os {
+  background-image: url('../images/os.png');
+}
+
+
 /* TOUR */
 .tour-tip {
   display: block;
@@ -591,4 +628,12 @@ path {
   width: 100%;
   padding: 8px;
   font-size: 14px;
+}
+
+.vbar {
+  position: absolute;
+  border-left: 1px solid #999;
+  height: 100%;
+  top: 0;
+  left: 50%;
 }
