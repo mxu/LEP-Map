@@ -415,6 +415,15 @@ path {
   padding-bottom: 32px;
 }
 
+.book-accolades {
+  list-style-type: none;
+}
+
+.book-accolades > li {
+  margin-top: 16px;
+  font-size: 16px;
+}
+
 /* METHODOLOGY PAGE */
 
 .container-method {
@@ -500,7 +509,7 @@ path {
 
 .media-thumb {
   font-weight: bold;
-  font-size: 52px;
+  font-size: 32px;
   color: #fff;
   line-height: 360px;
   text-align: center;
@@ -617,6 +626,18 @@ path {
 
 .media-thumb-akp {
   background-image: url('../images/akp.png');
+}
+
+.media-thumb-mp1 {
+  background-image: url('../images/mp1.png');
+}
+
+.media-thumb-mp2 {
+  background-image: url('../images/mp2.png');
+}
+
+.media-thumb-mp3 {
+  background-image: url('../images/mp3.png');
 }
 
 /* TOUR */
