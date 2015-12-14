@@ -216,6 +216,10 @@ body {
   color: #B9464B;
 }
 
+.navbar-default .navbar-nav > li > a > strong {
+  font-size: 14px;
+}
+
 /* PAGE FOOTER */
 
 .footer-container {
@@ -638,6 +642,10 @@ path {
 
 .media-thumb-mp3 {
   background-image: url('../images/mp3.png');
+}
+
+.media-thumb-rh {
+  background-image: url('../images/rh.png');
 }
 
 /* TOUR */
