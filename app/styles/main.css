@@ -615,6 +615,9 @@ path {
   background-image: url('../images/os.png');
 }
 
+.media-thumb-akp {
+  background-image: url('../images/akp.png');
+}
 
 /* TOUR */
 .tour-tip {
